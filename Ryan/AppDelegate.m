@@ -6,16 +6,61 @@
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
 
+#import "ViewController.h"
 #import "AppDelegate.h"
+#import "FirstViewController.h"
+#import "SecondViewController.h"
+#import "ThirdViewController.h"
+#import "MyLunchViewController.h"
+#import <FacebookSDK/FacebookSDK.h>
+#import <Foundation/NSXMLParser.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Override point for customization after application
+    
+    //make sure the FB login is loaded
+    [FBLoginView class];
+    
+    //my lunches
+    MyLunchViewController *myLunchViewController = [[MyLunchViewController alloc] init];
+    
+    //lunches to sign up for
+    SecondViewController *secondViewController = [[SecondViewController alloc] init];
+    
+    //create a lunch
+    ThirdViewController *thirdViewController = [[ThirdViewController alloc]init];
+    
+    //home view
+    FirstViewController *firstViewController = [[FirstViewController alloc] init];
+    
+    // set up navigation controllers and add viewcontrollers
+    UINavigationController *naviController = [[UINavigationController alloc]init];
+    
+    [naviController setViewControllers:@[secondViewController,thirdViewController,myLunchViewController,firstViewController]];
+    
+    // set up the window
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = naviController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
-							
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
+    BOOL wasHandled = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    // You can add your app-specific url handling code here if needed
+    
+    return wasHandled;
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

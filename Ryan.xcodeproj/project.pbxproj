@@ -21,6 +21,21 @@
 		77170D09197591FE00C288EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170CEB197591FD00C288EE /* UIKit.framework */; };
 		77170D11197591FE00C288EE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 77170D0F197591FE00C288EE /* InfoPlist.strings */; };
 		77170D13197591FE00C288EE /* RyanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D12197591FE00C288EE /* RyanTests.m */; };
+		77170D1F1975A76500C288EE /* rsz_sitwith.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D1E1975A76500C288EE /* rsz_sitwith.png */; };
+		77170D241975A8C400C288EE /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D231975A8C400C288EE /* FirstViewController.m */; };
+		77170D271975A96E00C288EE /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D261975A96E00C288EE /* SecondViewController.m */; };
+		77170D2A1975A9CA00C288EE /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D291975A9CA00C288EE /* ThirdViewController.m */; };
+		77170D2C1975BF9B00C288EE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170D2B1975BF9B00C288EE /* FacebookSDK.framework */; };
+		77170D2E1975C66400C288EE /* SitWithSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D2D1975C66400C288EE /* SitWithSmall.png */; };
+		77170D31197FF7B400C288EE /* MyLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D30197FF7B400C288EE /* MyLunchViewController.m */; };
+		77170D3319800B6E00C288EE /* UnionGrill.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D3219800B6E00C288EE /* UnionGrill.png */; };
+		77170D3519800ED800C288EE /* HarrisGrill.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D3419800ED800C288EE /* HarrisGrill.png */; };
+		77170D371980171A00C288EE /* sharpedgebistro.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D361980171A00C288EE /* sharpedgebistro.png */; };
+		77170D3A19801F3C00C288EE /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D3919801F3C00C288EE /* RegisterViewController.m */; };
+		77170D3D19802CEB00C288EE /* ConfirmLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D3C19802CEB00C288EE /* ConfirmLunchViewController.m */; };
+		77170D401981665F00C288EE /* PastLunchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D3F1981665F00C288EE /* PastLunchesViewController.m */; };
+		77170D42198192C400C288EE /* tablepic.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D41198192C300C288EE /* tablepic.png */; };
+		77170D471986B3B100C288EE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170D461986B3B100C288EE /* MessageUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +68,28 @@
 		77170D0E197591FE00C288EE /* RyanTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RyanTests-Info.plist"; sourceTree = "<group>"; };
 		77170D10197591FE00C288EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77170D12197591FE00C288EE /* RyanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyanTests.m; sourceTree = "<group>"; };
+		77170D1E1975A76500C288EE /* rsz_sitwith.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rsz_sitwith.png; sourceTree = "<group>"; };
+		77170D221975A8C400C288EE /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		77170D231975A8C400C288EE /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		77170D251975A96E00C288EE /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		77170D261975A96E00C288EE /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		77170D281975A9CA00C288EE /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		77170D291975A9CA00C288EE /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		77170D2B1975BF9B00C288EE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		77170D2D1975C66400C288EE /* SitWithSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SitWithSmall.png; sourceTree = "<group>"; };
+		77170D2F197FF7B400C288EE /* MyLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLunchViewController.h; sourceTree = "<group>"; };
+		77170D30197FF7B400C288EE /* MyLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLunchViewController.m; sourceTree = "<group>"; };
+		77170D3219800B6E00C288EE /* UnionGrill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnionGrill.png; sourceTree = "<group>"; };
+		77170D3419800ED800C288EE /* HarrisGrill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HarrisGrill.png; sourceTree = "<group>"; };
+		77170D361980171A00C288EE /* sharpedgebistro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharpedgebistro.png; sourceTree = "<group>"; };
+		77170D3819801F3C00C288EE /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		77170D3919801F3C00C288EE /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		77170D3B19802CEB00C288EE /* ConfirmLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmLunchViewController.h; path = ../ConfirmLunchViewController.h; sourceTree = "<group>"; };
+		77170D3C19802CEB00C288EE /* ConfirmLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmLunchViewController.m; path = ../ConfirmLunchViewController.m; sourceTree = "<group>"; };
+		77170D3E1981665E00C288EE /* PastLunchesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastLunchesViewController.h; sourceTree = "<group>"; };
+		77170D3F1981665F00C288EE /* PastLunchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastLunchesViewController.m; sourceTree = "<group>"; };
+		77170D41198192C300C288EE /* tablepic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablepic.png; sourceTree = "<group>"; };
+		77170D461986B3B100C288EE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77170CEA197591FD00C288EE /* CoreGraphics.framework in Frameworks */,
+				77170D2C1975BF9B00C288EE /* FacebookSDK.framework in Frameworks */,
 				77170CEC197591FD00C288EE /* UIKit.framework in Frameworks */,
 				77170CE8197591FD00C288EE /* Foundation.framework in Frameworks */,
 			);
@@ -70,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77170D471986B3B100C288EE /* MessageUI.framework in Frameworks */,
 				77170D07197591FE00C288EE /* XCTest.framework in Frameworks */,
 				77170D09197591FE00C288EE /* UIKit.framework in Frameworks */,
 				77170D08197591FE00C288EE /* Foundation.framework in Frameworks */,
@@ -101,6 +140,8 @@
 		77170CE6197591FD00C288EE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				77170D461986B3B100C288EE /* MessageUI.framework */,
+				77170D2B1975BF9B00C288EE /* FacebookSDK.framework */,
 				77170CE7197591FD00C288EE /* Foundation.framework */,
 				77170CE9197591FD00C288EE /* CoreGraphics.framework */,
 				77170CEB197591FD00C288EE /* UIKit.framework */,
@@ -112,8 +153,28 @@
 		77170CED197591FD00C288EE /* Ryan */ = {
 			isa = PBXGroup;
 			children = (
+				77170D1E1975A76500C288EE /* rsz_sitwith.png */,
+				77170D3219800B6E00C288EE /* UnionGrill.png */,
+				77170D3419800ED800C288EE /* HarrisGrill.png */,
+				77170D361980171A00C288EE /* sharpedgebistro.png */,
+				77170D41198192C300C288EE /* tablepic.png */,
 				77170CF6197591FD00C288EE /* AppDelegate.h */,
 				77170CF7197591FD00C288EE /* AppDelegate.m */,
+				77170D3B19802CEB00C288EE /* ConfirmLunchViewController.h */,
+				77170D3C19802CEB00C288EE /* ConfirmLunchViewController.m */,
+				77170D2F197FF7B400C288EE /* MyLunchViewController.h */,
+				77170D30197FF7B400C288EE /* MyLunchViewController.m */,
+				77170D2D1975C66400C288EE /* SitWithSmall.png */,
+				77170D281975A9CA00C288EE /* ThirdViewController.h */,
+				77170D291975A9CA00C288EE /* ThirdViewController.m */,
+				77170D3819801F3C00C288EE /* RegisterViewController.h */,
+				77170D3919801F3C00C288EE /* RegisterViewController.m */,
+				77170D251975A96E00C288EE /* SecondViewController.h */,
+				77170D261975A96E00C288EE /* SecondViewController.m */,
+				77170D221975A8C400C288EE /* FirstViewController.h */,
+				77170D231975A8C400C288EE /* FirstViewController.m */,
+				77170D3E1981665E00C288EE /* PastLunchesViewController.h */,
+				77170D3F1981665F00C288EE /* PastLunchesViewController.m */,
 				77170CF9197591FD00C288EE /* Main.storyboard */,
 				77170CFC197591FE00C288EE /* ViewController.h */,
 				77170CFD197591FE00C288EE /* ViewController.m */,
@@ -231,6 +292,12 @@
 				77170D00197591FE00C288EE /* Images.xcassets in Resources */,
 				77170CF2197591FD00C288EE /* InfoPlist.strings in Resources */,
 				77170CFB197591FD00C288EE /* Main.storyboard in Resources */,
+				77170D42198192C400C288EE /* tablepic.png in Resources */,
+				77170D3519800ED800C288EE /* HarrisGrill.png in Resources */,
+				77170D371980171A00C288EE /* sharpedgebistro.png in Resources */,
+				77170D3319800B6E00C288EE /* UnionGrill.png in Resources */,
+				77170D1F1975A76500C288EE /* rsz_sitwith.png in Resources */,
+				77170D2E1975C66400C288EE /* SitWithSmall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,9 +316,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77170D271975A96E00C288EE /* SecondViewController.m in Sources */,
 				77170CFE197591FE00C288EE /* ViewController.m in Sources */,
+				77170D3D19802CEB00C288EE /* ConfirmLunchViewController.m in Sources */,
+				77170D2A1975A9CA00C288EE /* ThirdViewController.m in Sources */,
+				77170D31197FF7B400C288EE /* MyLunchViewController.m in Sources */,
 				77170CF8197591FD00C288EE /* AppDelegate.m in Sources */,
 				77170CF4197591FD00C288EE /* main.m in Sources */,
+				77170D401981665F00C288EE /* PastLunchesViewController.m in Sources */,
+				77170D241975A8C400C288EE /* FirstViewController.m in Sources */,
+				77170D3A19801F3C00C288EE /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,9 +407,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos7.1;
 			};
 			name = Debug;
 		};
@@ -365,8 +439,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				SDKROOT = iphoneos;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos7.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -376,9 +450,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryan/Ryan-Prefix.pch";
 				INFOPLIST_FILE = "Ryan/Ryan-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -389,9 +468,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryan/Ryan-Prefix.pch";
 				INFOPLIST_FILE = "Ryan/Ryan-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -456,6 +540,7 @@
 				77170D18197591FE00C288EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		77170D19197591FE00C288EE /* Build configuration list for PBXNativeTarget "RyanTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +549,7 @@
 				77170D1B197591FE00C288EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
