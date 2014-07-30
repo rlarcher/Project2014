@@ -25,37 +25,10 @@
         self.view.backgroundColor = [UIColor whiteColor];
         
         // tell them to choose a location
-        self.choose = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, 350, 50)];
+        self.choose = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 350, 50)];
         self.choose.text = @"Choose a location and time for your lunch";
         [self.view addSubview:self.choose];
         
-        
-        // button for first restaurant choice
-        self.restaurant1 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.restaurant1.frame = CGRectMake(110, 150, 75, 30);
-        [self.restaurant1 setTitle:@"Union Grill" forState:UIControlStateNormal];
-        [self.view addSubview:self.restaurant1];
-        
-        // add the target for first restaurant
-        [self.restaurant1 addTarget:self action:@selector(chooseRest1:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // button for second restaurant choice
-        self.restaurant2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.restaurant2.frame = CGRectMake(110, 190, 75, 30);
-        [self.restaurant2 setTitle:@"Harris Grill" forState:UIControlStateNormal];
-        [self.view addSubview:self.restaurant2];
-        
-        // add the target for second restaurant choice
-        [self.restaurant2 addTarget:self action:@selector(chooseRest2:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // button for third restaurant choice
-        self.restaurant3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.restaurant3.frame = CGRectMake(50, 230, 200, 30);
-        [self.restaurant3 setTitle:@"Sharp Edge Bistro" forState:UIControlStateNormal];
-        [self.view addSubview:self.restaurant3];
-        
-        // add the target for the third restaurant
-        [self.restaurant3 addTarget:self action:@selector(chooseRest3:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return self;
@@ -66,8 +39,57 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Make Lunch";
+    self.restaurantIndex = 0;
     
-    self.dateAndTime = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 300, 300, 40)];
+    // display the lunch picture
+    UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xpf1/t1.0-9/1936792_101763893171479_5923274_n.jpg"]]];
+    CGSize scaleSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+    [firstLunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.lunchPicture = [[UIImageView alloc] initWithImage:resizedImage];
+    [self.lunchPicture setContentMode:UIViewContentModeScaleAspectFit];
+    self.lunchPicture.frame = CGRectOffset(self.lunchPicture.frame, self.view.center.x-(self.lunchPicture.frame.size.width/2), 100);
+    [self.view addSubview:self.lunchPicture];
+    
+    // restaurant name
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    self.locationName = [[UITextView alloc]initWithFrame:CGRectMake(0, 340, screenWidth, 50)];
+    [self.locationName setText:restaurantNames[self.restaurantIndex]];
+    [self.locationName setBackgroundColor:[UIColor whiteColor]];
+    self.locationName.editable = NO;
+    self.locationName.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.locationName];
+    
+    
+    // restaurant address
+    self.address = [[UITextView alloc] initWithFrame:CGRectMake(0, 370,screenWidth, 40)];
+    [self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.address setBackgroundColor:[UIColor whiteColor]];
+    self.address.editable = NO;
+    self.address.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.address];
+    
+    // button for next restaurant
+    self.nextRestaurant = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.nextRestaurant.frame = CGRectMake(0, 300, screenWidth/2, 50);
+    [self.nextRestaurant setTitle:@"Next Restaurant" forState:UIControlStateNormal];
+    [self.view addSubview:self.nextRestaurant];
+    
+    // add target for next button
+    [self.nextRestaurant addTarget:self action:@selector(changeRestaurant:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.chooseRestaurant = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.chooseRestaurant.frame = CGRectMake(screenWidth / 2, 300, screenWidth / 2, 50);
+    [self.chooseRestaurant setTitle:@"Make Lunch" forState:UIControlStateNormal];
+    [self.view addSubview:self.chooseRestaurant];
+    
+    // add target for choose restaurant
+    [self.chooseRestaurant addTarget:self action:@selector(makeLunch:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.dateAndTime = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 390, 300, 40)];
     self.dateAndTime.datePickerMode = UIDatePickerModeDateAndTime;
     self.dateAndTime.hidden = NO;
     self.dateAndTime.minuteInterval = 30;
@@ -94,6 +116,30 @@
     }
     NSLog(@"hour is %d",[dateComps hour]);
     chosenDate = self.dateAndTime.date;
+}
+
+-(void)changeRestaurant:(UIButton *)sender
+{
+    // change the restaurant information displayed
+    self.restaurantIndex += 1;
+    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    CGSize scaleSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+    [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.lunchPicture setImage:resizedImage];
+    [self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.locationName setText:restaurantNames[self.restaurantIndex]];
+    
+}
+
+- (void)makeLunch:(UIButton *)sender
+{
+    chosenRestaurant = restaurantNames[self.restaurantIndex];
+    RegisterViewController *registerViewController = [[RegisterViewController alloc]init];
+    [self.navigationController pushViewController:registerViewController animated:YES];
 }
 
 - (void)chooseRest1:(UIButton *)sender

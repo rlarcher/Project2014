@@ -20,21 +20,26 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        // initialize some stuff
         self.parsingAddress = NO;
         self.parsingRestaurant = NO;
         self.parsingName = NO;
+        self.parsingPicture = NO;
+        self.parsingTime = NO;
+        restaurantAvailability = [[NSMutableArray alloc]init];
         restaurantNames = [[NSMutableArray alloc] init];
         restaurantLocations = [[NSMutableArray alloc]init];
         restaurantPictures = [[NSMutableArray alloc]init];
+        beginTimes = [[NSMutableArray alloc]init];
         
-        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"restaurant_list" ofType:@"xml"]];
+        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"lunchtable_list" ofType:@"xml"]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
         BOOL result = [parser parse];
         if(!result) NSLog(@"Oh no that parse thing didn't go so well");
         
         self.title = @"Find Lunches";
-        self.view.backgroundColor = [UIColor lightGrayColor];
+        self.view.backgroundColor = [UIColor whiteColor];
         
         // set the back button so it goes to the home screen
         [self.navigationItem setHidesBackButton:YES];
@@ -43,21 +48,48 @@
         
         // arrays and variables for restaurant information
         self.restaurantPictures = @[@"sharpedgebistro",@"UnionGrill",@"HarrisGrill"];
-        self.restaurantAddresses = @[@"302 S. St. Clair St. Pittsburgh, PA 15206",@"413 S. Craig St. Pittsburgh, PA 15213",@"5747 Ellsworth Ave. Pittsburgh, PA 15232"];
+        restaurantLocations = (NSMutableArray *)@[@"302 S. St. Clair St. Pittsburgh, PA 15206",@"413 S. Craig St. Pittsburgh, PA 15213",@"5747 Ellsworth Ave. Pittsburgh, PA 15232"];
         self.lunchTimes = @[@"August 18th at Noon",@"August 19th at Noon",@"August 20th at Noon"];
         self.restaurantIndex = 0;
         
         // set the array of pictures for number of seats taken
         self.availabilityArray = @[@"1Table",@"2Table",@"3Table",@"4Table"];
         
-        self.availabilityPic = [UIImageView alloc];
-        self.availabilityPic = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.availabilityArray[0]]];
+        self.availabilityPic = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"emptyTable"]];
+        NSString *myCount = restaurantAvailability[self.restaurantIndex];
+        if([myCount isEqualToString:@"0"])
+        {
+            [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];
+        }
+        if([myCount isEqualToString:@"1"])
+        {
+            [self.availabilityPic setImage:[UIImage imageNamed:@"1Table"]];
+        }
+        if([myCount isEqualToString:@"2"])
+        {
+            [self.availabilityPic setImage:[UIImage imageNamed:@"2Table"]];
+        }
+        if([myCount isEqualToString:@"3"])
+        {
+            [self.availabilityPic setImage:[UIImage imageNamed:@"3Table"]];
+        }
+        if([myCount isEqualToString:@"4"])
+        {
+            [self.availabilityPic setImage:[UIImage imageNamed:@"4Table"]];
+        }
+        
         [self.availabilityPic setContentMode:UIViewContentModeScaleAspectFit];
         self.availabilityPic.frame = CGRectMake(145,310,25,25);
         [self.view addSubview:self.availabilityPic];
         
         // display the lunch picture
-        self.lunchPicture = [[UIImageView alloc] initWithImage:[UIImage imageNamed:self.restaurantPictures[self.restaurantIndex]]];
+        UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xpf1/t1.0-9/1936792_101763893171479_5923274_n.jpg"]]];
+        CGSize scaleSize = CGSizeMake(200, 200);
+        UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+        [firstLunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+        UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        self.lunchPicture = [[UIImageView alloc] initWithImage:resizedImage];
         [self.lunchPicture setContentMode:UIViewContentModeScaleAspectFit];
         self.lunchPicture.frame = CGRectOffset(self.lunchPicture.frame, self.view.center.x-(self.lunchPicture.frame.size.width/2), 100);
         [self.view addSubview:self.lunchPicture];
@@ -67,7 +99,7 @@
         CGFloat screenWidth = screenRect.size.width;
         self.locationName = [[UITextView alloc]initWithFrame:CGRectMake(0, 360, screenWidth, 70)];
         [self.locationName setText:restaurantNames[self.restaurantIndex]];
-        [self.locationName setBackgroundColor:[UIColor lightGrayColor]];
+        [self.locationName setBackgroundColor:[UIColor whiteColor]];
         self.locationName.editable = NO;
         self.locationName.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:self.locationName];
@@ -76,28 +108,29 @@
         // restaurant address
         self.address = [[UITextView alloc] initWithFrame:CGRectMake(0, 385,screenWidth, 100)];
         [self.address setText:restaurantLocations[self.restaurantIndex]];
-        [self.address setBackgroundColor:[UIColor lightGrayColor]];
+        [self.address setBackgroundColor:[UIColor whiteColor]];
         self.address.editable = NO;
         self.address.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:self.address];
         
         // add time to the view
         self.time = [[UITextView alloc] initWithFrame:CGRectMake(0, 340, screenWidth, 30)];
-        [self.time setText:self.lunchTimes[self.restaurantIndex]];
-        [self.time setBackgroundColor:[UIColor lightGrayColor]];
+        [self.time setText:beginTimes[self.restaurantIndex]];
+        [self.time setBackgroundColor:[UIColor whiteColor]];
         self.time.editable = NO;
         self.time.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:self.time];
        
         // button to show next lunch
         UIButton *nextLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        nextLunch.frame = CGRectMake(100, 420, 100, 44);
-        [nextLunch setTitle:@"Next" forState:UIControlStateNormal];
+        nextLunch.frame = CGRectMake(70, 420, 100, 44);
+        [nextLunch setTitle:@"Skip" forState:UIControlStateNormal];
         [self.view addSubview:nextLunch];
         
         // call function that will change lunch info
         [nextLunch addTarget:self action:@selector(showNextLunch:) forControlEvents:UIControlEventTouchUpInside];
         
+        /*
         // button to show previous lunch
         UIButton *prevLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         prevLunch.frame = CGRectMake(30, 420, 100, 44);
@@ -106,11 +139,12 @@
         
         // call function that will change lunch info
         [prevLunch addTarget:self action:@selector(showPrevLunch:) forControlEvents:UIControlEventTouchUpInside];
+        */
         
         // button to sign up
         UIButton *signUp = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        signUp.frame = CGRectMake(170, 420, 100, 44);
-        [signUp setTitle:@"Sign Up" forState:UIControlStateNormal];
+        signUp.frame = CGRectMake(140, 420, 100, 44);
+        [signUp setTitle:@"Join" forState:UIControlStateNormal];
         [self.view addSubview:signUp];
         
         // target for sign up
@@ -127,7 +161,7 @@
         
         // alert when lunch is selected
         self.registerAlert = [[UIAlertView alloc] initWithTitle:@"SitWith" message:
-                              [NSString stringWithFormat:@"Confirm lunch for %@? ",self.lunchTimes[0]] delegate:nil cancelButtonTitle:@"No"
+                              [NSString stringWithFormat:@"Confirm lunch for %@? ",beginTimes[0]] delegate:nil cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
 
     }
@@ -136,7 +170,7 @@
 
     -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
     {
-        if([elementName isEqualToString:@"name"])
+        if([elementName isEqualToString:@"restaurant_name"])
         {
             self.parsingName = YES;
         }
@@ -144,15 +178,23 @@
         {
             self.parsingAddress = YES;
         }
-        if([elementName isEqualToString:@"picture"])
+        if([elementName isEqualToString:@"restaurant_picture"])
         {
             self.parsingPicture = YES;
+        }
+        if([elementName isEqualToString:@"availablebegintime"])
+        {
+            self.parsingTime = YES;
+        }
+        if([elementName isEqualToString:@"count"])
+        {
+            self.parsingAvailability = YES;
         }
     }
     
     -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
         //NSLog(@"Did end element");
-        if([elementName isEqualToString:@"name"])
+        if([elementName isEqualToString:@"restaurant_name"])
         {
             self.parsingName = NO;
         }
@@ -160,9 +202,17 @@
         {
             self.parsingAddress = NO;
         }
-        if([elementName isEqualToString:@"picture"])
+        if([elementName isEqualToString:@"restaurant_picture"])
         {
             self.parsingPicture = NO;
+        }
+        if([elementName isEqualToString:@"availablebegintime"])
+        {
+            self.parsingTime = NO;
+        }
+        if([elementName isEqualToString:@"count"])
+        {
+            self.parsingAvailability = NO;
         }
     }
     
@@ -180,6 +230,14 @@
         {
             [restaurantPictures addObject:(NSString *)string];
         }
+        if(self.parsingTime)
+        {
+            [beginTimes addObject:(NSString *)string];
+        }
+        if(self.parsingAvailability)
+        {
+            [restaurantAvailability addObject:(NSString *)string];
+        }
     }
     
 
@@ -195,8 +253,15 @@
 
 -(void)signUpLunch:(UIButton *)sender
 {
-    self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",self.lunchTimes[self.restaurantIndex]];
-    [self.registerAlert show];
+    if(!([restaurantAvailability[self.restaurantIndex] isEqualToString:@"4"]))
+    {
+        self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",beginTimes[self.restaurantIndex]];
+    }
+    else
+    {
+        self.registerAlert.message = @"This lunch is full";
+    }
+        [self.registerAlert show];
 }
 
 - (void)makeLunch:(UIButton *)sender
@@ -213,20 +278,51 @@
 - (void)showNextLunch:(UIButton *)sender
 {
     self.restaurantIndex += 1;
-    if(self.restaurantIndex >= [self.restaurantPictures count]) self.restaurantIndex = 0;
-    UIImage *image = [UIImage imageNamed:self.restaurantPictures[self.restaurantIndex]];
-    [self.lunchPicture setImage:image];
+    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    CGSize scaleSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+    [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.lunchPicture setImage:resizedImage];
     [self.address setText:restaurantLocations[self.restaurantIndex]];
     [self.locationName setText:restaurantNames[self.restaurantIndex]];
-    [self.time setText:self.lunchTimes[self.restaurantIndex]];
+    NSString *theCount = restaurantAvailability[self.restaurantIndex];
+    if([theCount isEqualToString:@"0"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];
+    }
+    if([theCount isEqualToString:@"1"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"1Table"]];
+    }
+    if([theCount isEqualToString:@"2"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"2Table"]];
+    }
+    if([theCount isEqualToString:@"3"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"3Table"]];
+    }
+    if([theCount isEqualToString:@"4"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"4Table"]];
+    }
+    [self.time setText:beginTimes[self.restaurantIndex]];
 }
 
 -(void)showPrevLunch:(UIButton *)sender
 {
     self.restaurantIndex -= 1;
     if(self.restaurantIndex < 0) self.restaurantIndex = [self.restaurantPictures count] - 1;
-    UIImage *image = [UIImage imageNamed:self.restaurantPictures[self.restaurantIndex]];
-    [self.lunchPicture setImage:image];
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    CGSize scaleSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+    [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.lunchPicture setImage:resizedImage];
     [self.address setText:restaurantLocations[self.restaurantIndex]];
     [self.locationName setText:restaurantNames[self.restaurantIndex]];
     [self.time setText:self.lunchTimes[self.restaurantIndex]];

@@ -13,6 +13,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <FacebookSDK/FBSession.h>
 #import "PastLunchesViewController.h"
+#import "SettingsViewController.h"
 
 @interface FirstViewController ()
 
@@ -36,6 +37,17 @@
         
         // hide the back button because this is first screen
         [self.navigationItem setHidesBackButton:YES];
+
+        self.settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.settingsButton.frame = CGRectMake(0, 0, 80, 30);
+        [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+        
+        // add the target
+        [self.settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // make it the upper left button
+        UIBarButtonItem *button = [[UIBarButtonItem alloc]initWithCustomView:self.settingsButton];
+        self.navigationItem.leftBarButtonItem = button;
         
         // SitWith logo
         UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SitWithSmall"]];
@@ -181,9 +193,16 @@
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
     // set the welcome message with the user name
-    userName = user.name;
+    userName = (NSMutableString *)user.name;
     self.nameLabel.text = [NSString stringWithFormat:@"Welcome %@",user.first_name];
     userEmail = user[@"email"];
+}
+
+-(void) showSettings:(UIButton *)sender
+{
+    // change the view to show the settings
+    SettingsViewController *settingsViewController = [[SettingsViewController alloc]init];
+    [self.navigationController pushViewController:settingsViewController animated:YES];
 }
 
 - (void)showLunches:(UIButton *)sender

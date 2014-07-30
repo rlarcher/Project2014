@@ -15,6 +15,12 @@
 @property (strong,nonatomic) UILabel *choose;
 @property (strong,nonatomic) UIDatePicker *dateAndTime;
 @property (strong,nonatomic) UIAlertView *badTime;
+@property (strong,nonatomic) UITextView *locationName;
+@property (strong,nonatomic) UIImageView *lunchPicture;
+@property (strong,nonatomic) UITextView *address;
+@property (strong,nonatomic) UIButton *nextRestaurant;
+@property (strong,nonatomic) UIButton *chooseRestaurant;
+@property int restaurantIndex;
 @end
 
 

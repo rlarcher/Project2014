@@ -16,9 +16,12 @@ NSArray *ampm;
 NSDate *chosenDate;
 NSMutableString *userName;
 NSMutableString *userEmail;
+// arrays that will hold data taken from xml files
+NSMutableArray *restaurantAvailability;
 NSMutableArray *restaurantNames;
 NSMutableArray *restaurantLocations;
 NSMutableArray *restaurantPictures;
+NSMutableArray *beginTimes;
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

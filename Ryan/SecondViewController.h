@@ -20,10 +20,14 @@
 @property (strong,nonatomic) UITextView *locationName;
 @property (strong,nonatomic) UIAlertView *registerAlert;
 @property NSMutableString *currentAddress;
+// these variables will keep track of which data
+// is being read by the parser
 @property BOOL parsingRestaurant;
 @property BOOL parsingAddress;
 @property BOOL parsingName;
 @property BOOL parsingPicture;
+@property BOOL parsingTime;
+@property BOOL parsingAvailability;
 
 @property int restaurantIndex;
 @end

@@ -53,6 +53,8 @@
 		77170D631988203A00C288EE /* one_restaurant.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D541988118100C288EE /* one_restaurant.xml */; };
 		77170D641988203A00C288EE /* one_lunchtable.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D551988118100C288EE /* one_lunchtable.xml */; };
 		77170D651988203A00C288EE /* lunchtable_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D561988118100C288EE /* lunchtable_list.xml */; };
+		778799F219894A6A002AA39A /* emptyTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 778799F119894A6A002AA39A /* emptyTable.png */; };
+		778799F5198972B4002AA39A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778799F4198972B4002AA39A /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,9 @@
 		77170D541988118100C288EE /* one_restaurant.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = one_restaurant.xml; path = ../../Downloads/one_restaurant.xml; sourceTree = "<group>"; };
 		77170D551988118100C288EE /* one_lunchtable.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = one_lunchtable.xml; path = ../../Downloads/one_lunchtable.xml; sourceTree = "<group>"; };
 		77170D561988118100C288EE /* lunchtable_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = lunchtable_list.xml; path = ../../Downloads/lunchtable_list.xml; sourceTree = "<group>"; };
+		778799F119894A6A002AA39A /* emptyTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emptyTable.png; path = "../../SitWith Pics/emptyTable.png"; sourceTree = "<group>"; };
+		778799F3198972B4002AA39A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		778799F4198972B4002AA39A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +185,7 @@
 			children = (
 				77170D5E19881E4000C288EE /* Resources */,
 				77170D481987F2A800C288EE /* 1Table.png */,
+				778799F119894A6A002AA39A /* emptyTable.png */,
 				77170D4A1987F2B800C288EE /* 2Table.png */,
 				77170D4B1987F2B800C288EE /* 3Table.png */,
 				77170D4C1987F2B800C288EE /* 4Table.png */,
@@ -201,6 +207,8 @@
 				77170D261975A96E00C288EE /* SecondViewController.m */,
 				77170D221975A8C400C288EE /* FirstViewController.h */,
 				77170D231975A8C400C288EE /* FirstViewController.m */,
+				778799F3198972B4002AA39A /* SettingsViewController.h */,
+				778799F4198972B4002AA39A /* SettingsViewController.m */,
 				77170D3E1981665E00C288EE /* PastLunchesViewController.h */,
 				77170D3F1981665F00C288EE /* PastLunchesViewController.m */,
 				77170CF9197591FD00C288EE /* Main.storyboard */,
@@ -347,6 +355,7 @@
 				77170D371980171A00C288EE /* sharpedgebistro.png in Resources */,
 				77170D581988118100C288EE /* restaurant_list.xml in Resources */,
 				77170D3319800B6E00C288EE /* UnionGrill.png in Resources */,
+				778799F219894A6A002AA39A /* emptyTable.png in Resources */,
 				77170D1F1975A76500C288EE /* rsz_sitwith.png in Resources */,
 				77170D5B1988118100C288EE /* one_restaurant.xml in Resources */,
 				77170D2E1975C66400C288EE /* SitWithSmall.png in Resources */,
@@ -383,6 +392,7 @@
 				77170CF8197591FD00C288EE /* AppDelegate.m in Sources */,
 				77170CF4197591FD00C288EE /* main.m in Sources */,
 				77170D401981665F00C288EE /* PastLunchesViewController.m in Sources */,
+				778799F5198972B4002AA39A /* SettingsViewController.m in Sources */,
 				77170D241975A8C400C288EE /* FirstViewController.m in Sources */,
 				77170D3A19801F3C00C288EE /* RegisterViewController.m in Sources */,
 			);

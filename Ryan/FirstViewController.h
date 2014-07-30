@@ -19,6 +19,7 @@
 @property BOOL parsingUserName;
 @property BOOL foundUser;
 @property BOOL parsingEmail;
+@property UIButton *settingsButton;
 @end
 
 @interface LoginUIViewController : UIViewController <FBLoginViewDelegate>
