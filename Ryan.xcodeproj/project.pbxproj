@@ -32,7 +32,6 @@
 		77170D3519800ED800C288EE /* HarrisGrill.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D3419800ED800C288EE /* HarrisGrill.png */; };
 		77170D371980171A00C288EE /* sharpedgebistro.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D361980171A00C288EE /* sharpedgebistro.png */; };
 		77170D3A19801F3C00C288EE /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D3919801F3C00C288EE /* RegisterViewController.m */; };
-		77170D3D19802CEB00C288EE /* ConfirmLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D3C19802CEB00C288EE /* ConfirmLunchViewController.m */; };
 		77170D401981665F00C288EE /* PastLunchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D3F1981665F00C288EE /* PastLunchesViewController.m */; };
 		77170D42198192C400C288EE /* tablepic.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D41198192C300C288EE /* tablepic.png */; };
 		77170D471986B3B100C288EE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170D461986B3B100C288EE /* MessageUI.framework */; };
@@ -101,8 +100,6 @@
 		77170D361980171A00C288EE /* sharpedgebistro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharpedgebistro.png; sourceTree = "<group>"; };
 		77170D3819801F3C00C288EE /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		77170D3919801F3C00C288EE /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
-		77170D3B19802CEB00C288EE /* ConfirmLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmLunchViewController.h; path = ../ConfirmLunchViewController.h; sourceTree = "<group>"; };
-		77170D3C19802CEB00C288EE /* ConfirmLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmLunchViewController.m; path = ../ConfirmLunchViewController.m; sourceTree = "<group>"; };
 		77170D3E1981665E00C288EE /* PastLunchesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastLunchesViewController.h; sourceTree = "<group>"; };
 		77170D3F1981665F00C288EE /* PastLunchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastLunchesViewController.m; sourceTree = "<group>"; };
 		77170D41198192C300C288EE /* tablepic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tablepic.png; sourceTree = "<group>"; };
@@ -194,8 +191,6 @@
 				77170D41198192C300C288EE /* tablepic.png */,
 				77170CF6197591FD00C288EE /* AppDelegate.h */,
 				77170CF7197591FD00C288EE /* AppDelegate.m */,
-				77170D3B19802CEB00C288EE /* ConfirmLunchViewController.h */,
-				77170D3C19802CEB00C288EE /* ConfirmLunchViewController.m */,
 				77170D2F197FF7B400C288EE /* MyLunchViewController.h */,
 				77170D30197FF7B400C288EE /* MyLunchViewController.m */,
 				77170D281975A9CA00C288EE /* ThirdViewController.h */,
@@ -383,7 +378,6 @@
 			files = (
 				77170D271975A96E00C288EE /* SecondViewController.m in Sources */,
 				77170CFE197591FE00C288EE /* ViewController.m in Sources */,
-				77170D3D19802CEB00C288EE /* ConfirmLunchViewController.m in Sources */,
 				77170D2A1975A9CA00C288EE /* ThirdViewController.m in Sources */,
 				77170D31197FF7B400C288EE /* MyLunchViewController.m in Sources */,
 				77170CF8197591FD00C288EE /* AppDelegate.m in Sources */,
