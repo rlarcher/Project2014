@@ -14,5 +14,6 @@
 @property (strong,nonatomic) UIButton *feedback;
 @property BOOL foundUser;
 @property BOOL parsingUserData;
+@property BOOL parsingUserName;
 @property NSMutableString *userFromParse;
 @end

@@ -57,28 +57,37 @@
     //NSLog(@"Did start element");
     if([elementName isEqualToString:@"user"])
     {
-        self.parsingUserData = true;
+        self.parsingUserData = YES;
         return;
+    }
+    if([elementName isEqualToString:@"name"])
+    {
+        self.parsingUserName = YES;
     }
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     //NSLog(@"Did end element");
+    // reached the end of the XML file
+    if([elementName isEqualToString:@"Users"]) return;
     if([elementName isEqualToString:@"name"])
     {
         // let app know that it is between name tags
-        self.parsingUserData = YES;
+        self.parsingUserName = NO;
         // this checks to see if user is in the xml table
         if([self.userFromParse isEqualToString:userName])
         {
             self.foundUser = YES;
+        }
+        else {
+            self.userFromParse = nil;
         }
     }
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    if(self.parsingUserData)
+    if(self.parsingUserName)
     {
         // add the found characters to the parsed UserName
         // this only occurs for string between xml name tags

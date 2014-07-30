@@ -14,9 +14,11 @@
 - (IBAction)showEmail:(id)sender;
 @property (strong,nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UIButton *contact;
+@property NSMutableString *userFromParse;
 @property BOOL parsingUserData;
-@property NSString *userFromParse;
+@property BOOL parsingUserName;
 @property BOOL foundUser;
+@property BOOL parsingEmail;
 @end
 
 @interface LoginUIViewController : UIViewController <FBLoginViewDelegate>

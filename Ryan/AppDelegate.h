@@ -9,13 +9,16 @@
 #import <UIKit/UIKit.h>
 @class ViewController;
 
-NSString *userEmail;
 NSString *chosenRestaurant;
 NSArray *possibleHours;
 NSArray *possibleMinutes;
 NSArray *ampm;
 NSDate *chosenDate;
-NSString *userName;
+NSMutableString *userName;
+NSMutableString *userEmail;
+NSMutableArray *restaurantNames;
+NSMutableArray *restaurantLocations;
+NSMutableArray *restaurantPictures;
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

@@ -211,50 +211,79 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSURL *url = [[NSURL alloc]initWithString:@"http://www.logarun.com/xml.ashx?username=ryan.archer&type=view"];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+    [userName appendString:@"Terry Yang"];
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"user_list" ofType:@"xml"]];
+    NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
     [parser setDelegate:self];
-    BOOL result = [parser parse];
+    [parser parse];
+    NSLog(@"Email is %@ and Name is %@",userEmail,userName);
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    //NSLog(@"Did start element");
-    if([elementName isEqualToString:@"log"])
+    NSLog(@"Did start element");
+    if([elementName isEqualToString:@"user"])
     {
-        NSLog(@"found root element");
+        self.parsingUserData = YES;
         return;
     }
-    if([elementName isEqualToString:@"dayItem"])
+    if([elementName isEqualToString:@"name"])
     {
-        NSString *runDate = [attributeDict objectForKey:@"date"];
-        NSString *myDate = @"7/28/2014";
-        if([runDate isEqualToString:myDate])
-        {
-            NSLog(@"This run was from 7/28");
-        }
+        self.parsingUserName = YES;
     }
-    if([elementName isEqualToString:@"item"])
+    if([elementName isEqualToString:@"email"])
     {
-        NSLog(@"");
+        self.parsingEmail = YES;
     }
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     //NSLog(@"Did end element");
-    if([elementName isEqualToString:@"log"])
+    // reached the end of the XML file
+    if([elementName isEqualToString:@"Users"]) return;
+    if([elementName isEqualToString:@"name"])
     {
-        NSLog(@"root element end");
+        // let app know that it is between name tags
+        self.parsingUserName = NO;
+        // this checks to see if user is in the xml table
+        if([self.userFromParse isEqualToString:userName])
+        {
+            self.foundUser = YES;
+        }
+        else {
+            self.userFromParse = nil;
+        }
     }
+    if([elementName isEqualToString:@"email"]) self.parsingEmail = NO;
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    NSString *tagName = @"column";
-    if([tagName isEqualToString:@"column"])
+    if(self.parsingUserName)
     {
-        //NSLog(@"Value %@",string);
+        // add the found characters to the parsed UserName
+        // this only occurs for string between xml name tags
+        [self.userFromParse appendString:string];
     }
+    if(self.parsingEmail)
+    {
+        [userEmail appendString:string];
+        NSLog(string);
+    }
+}
+
+// error handling
+-(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+    NSLog(@"XMLParser error: %@", [parseError localizedDescription]);
+}
+
+-(void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    NSLog(@"Started the document");
+}
+
+-(void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError {
+    NSLog(@"XMLParser error: %@", [validationError localizedDescription]);
 }
 
 - (void)didReceiveMemoryWarning

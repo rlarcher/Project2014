@@ -8,13 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
+@interface SecondViewController : UIViewController <NSXMLParserDelegate>
 @property (strong,nonatomic) UIImageView *lunchPicture;
+@property (strong,nonatomic) NSArray *availabilityArray;
+@property (strong,nonatomic) UIImageView *availabilityPic;
 @property (strong,nonatomic) NSArray *restaurantPictures;
-@property (strong,nonatomic) NSArray *restaurantAddresses;
+@property NSArray *restaurantAddresses;
 @property (strong,nonatomic) NSArray *lunchTimes;
 @property (strong,nonatomic) UITextView *time;
 @property (strong, nonatomic) UITextView *address;
+@property (strong,nonatomic) UITextView *locationName;
 @property (strong,nonatomic) UIAlertView *registerAlert;
+@property NSMutableString *currentAddress;
+@property BOOL parsingRestaurant;
+@property BOOL parsingAddress;
+@property BOOL parsingName;
+@property BOOL parsingPicture;
+
 @property int restaurantIndex;
 @end
