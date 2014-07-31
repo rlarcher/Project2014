@@ -163,6 +163,8 @@
         self.registerAlert = [[UIAlertView alloc] initWithTitle:@"SitWith" message:
                               [NSString stringWithFormat:@"Confirm lunch for %@? ",beginTimes[0]] delegate:nil cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
+        
+        
 
     }
     return self;
@@ -243,6 +245,15 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if(buttonIndex == 1)
+    {
+        // find a way to add the user to the database
+        // otherwise the user clicked no
+    }
+    else
+    {
+        // user cancelled at confirmation
+    }
     self.restaurantIndex += 1;
     if(self.restaurantIndex >= [self.restaurantPictures count]) self.restaurantIndex = 0;
     UIImage *image = [UIImage imageNamed:self.restaurantPictures[self.restaurantIndex]];

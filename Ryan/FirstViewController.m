@@ -14,6 +14,7 @@
 #import <FacebookSDK/FBSession.h>
 #import "PastLunchesViewController.h"
 #import "SettingsViewController.h"
+#import "AFNetworking.h"
 
 @interface FirstViewController ()
 
@@ -230,12 +231,43 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [userName appendString:@"Terry Yang"];
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"user_list" ofType:@"xml"]];
+    NSString *server = @"http://128.237.127.135:8888/SitWithWebServer/getAllLunchTable";
+    NSURL *url = [NSURL URLWithString:server];
+    /*NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    // Make sure to set the responseSerializer correctly
+    operation.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSXMLParser *parser = (NSXMLParser *)responseObject;
+        [parser setDelegate:self];
+        [parser parse];
+        
+        NSLog(@"It worked");
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error.localizedDescription);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        
+    }];
+    
+    [operation start];*/
     NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
     [parser setDelegate:self];
-    [parser parse];
-    NSLog(@"Email is %@ and Name is %@",userEmail,userName);
+    BOOL result = [parser parse];
+    if(result == NO)
+    {
+        NSLog(@"%@",[parser parserError].localizedDescription);
+    }
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
@@ -268,6 +300,8 @@
         if([self.userFromParse isEqualToString:userName])
         {
             self.foundUser = YES;
+            // now find a way to add the user to the database
+            
         }
         else {
             self.userFromParse = nil;

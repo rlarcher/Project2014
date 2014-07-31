@@ -20,6 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application
+    serverAddress = @"http://128.237.127.135:8888/SitWithWebServer";
     
     //make sure the FB login is loaded
     [FBLoginView class];

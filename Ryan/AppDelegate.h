@@ -22,6 +22,7 @@ NSMutableArray *restaurantNames;
 NSMutableArray *restaurantLocations;
 NSMutableArray *restaurantPictures;
 NSMutableArray *beginTimes;
+NSString *serverAddress;
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
