@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Restaurant.h"
 
 @interface SecondViewController : UIViewController <NSXMLParserDelegate>
 @property (strong,nonatomic) UIImageView *lunchPicture;
@@ -20,6 +21,7 @@
 @property (strong,nonatomic) UITextView *locationName;
 @property (strong,nonatomic) UIAlertView *registerAlert;
 @property NSMutableString *currentAddress;
+@property Restaurant *currentRestaurant;
 // these variables will keep track of which data
 // is being read by the parser
 @property BOOL parsingRestaurant;

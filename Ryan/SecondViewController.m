@@ -9,6 +9,7 @@
 #import "FirstViewController.h"
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
+#import "Restaurant.h"
 
 @interface SecondViewController ()
 
@@ -210,6 +211,10 @@
 
     -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
     {
+        if([elementName isEqualToString:@"Restaurant"])
+        {
+            self.currentRestaurant = [[Restaurant alloc]init];
+        }
         if([elementName isEqualToString:@"restaurant_name"])
         {
             self.parsingName = YES;
@@ -261,18 +266,22 @@
         if(self.parsingName)
         {
             [restaurantNames addObject:(NSString *)string];
+            [self.currentRestaurant setName:string];
         }
         if(self.parsingAddress)
         {
             [restaurantLocations addObject:(NSString *)string];
+            [self.currentRestaurant setAddress:string];
         }
         if(self.parsingPicture)
         {
             [restaurantPictures addObject:(NSString *)string];
+            [self.currentRestaurant setPicture:string];
         }
         if(self.parsingTime)
         {
             [beginTimes addObject:(NSString *)string];
+            [self.currentRestaurant setHours:string];
         }
         if(self.parsingAvailability)
         {

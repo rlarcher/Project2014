@@ -73,6 +73,7 @@
 		77879A64198A8B5B002AA39A /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A5B198A8B5B002AA39A /* UIRefreshControl+AFNetworking.m */; };
 		77879A65198A8B5B002AA39A /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A5D198A8B5B002AA39A /* UIWebView+AFNetworking.m */; };
 		77879A68198BD611002AA39A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A67198BD611002AA39A /* User.m */; };
+		77879A6B198BDF7D002AA39A /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A6A198BDF7D002AA39A /* Restaurant.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,8 @@
 		77879A5D198A8B5B002AA39A /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		77879A66198BD611002AA39A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		77879A67198BD611002AA39A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		77879A69198BDF7D002AA39A /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
+		77879A6A198BDF7D002AA39A /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +270,8 @@
 				77170D261975A96E00C288EE /* SecondViewController.m */,
 				77170D221975A8C400C288EE /* FirstViewController.h */,
 				77170D231975A8C400C288EE /* FirstViewController.m */,
+				77879A69198BDF7D002AA39A /* Restaurant.h */,
+				77879A6A198BDF7D002AA39A /* Restaurant.m */,
 				778799F3198972B4002AA39A /* SettingsViewController.h */,
 				778799F4198972B4002AA39A /* SettingsViewController.m */,
 				77170D3E1981665E00C288EE /* PastLunchesViewController.h */,
@@ -517,6 +522,7 @@
 				778799F5198972B4002AA39A /* SettingsViewController.m in Sources */,
 				77170D241975A8C400C288EE /* FirstViewController.m in Sources */,
 				77879A49198A8B4B002AA39A /* AFURLRequestSerialization.m in Sources */,
+				77879A6B198BDF7D002AA39A /* Restaurant.m in Sources */,
 				77879A64198A8B5B002AA39A /* UIRefreshControl+AFNetworking.m in Sources */,
 				77879A62198A8B5B002AA39A /* UIImageView+AFNetworking.m in Sources */,
 				77879A46198A8B4B002AA39A /* AFNetworkReachabilityManager.m in Sources */,
