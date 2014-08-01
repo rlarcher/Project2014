@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "User.h"
 
 @interface FirstViewController : UIViewController <NSXMLParserDelegate>
 - (IBAction)showEmail:(id)sender;
@@ -20,6 +21,7 @@
 @property BOOL foundUser;
 @property BOOL parsingEmail;
 @property UIButton *settingsButton;
+@property User *currentUser;
 @end
 
 @interface LoginUIViewController : UIViewController <FBLoginViewDelegate>

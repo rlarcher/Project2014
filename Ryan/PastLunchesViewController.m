@@ -35,10 +35,15 @@
     self.pastLunchArray = @[@"Sharp Edge Bistro",@"Harris Grill"];
     
     // past lunch text
-    self.lunch = [[UITextView alloc]initWithFrame:CGRectMake(10, 30, 150, 100)];
+    self.lunch = [[UITextView alloc]initWithFrame:CGRectMake(10, 60, 150, 30)];
     [self.lunch setBackgroundColor:[UIColor whiteColor]];
     self.lunch.text = self.pastLunchArray[0];
     [self.view addSubview:self.lunch];
+    
+    self.guest1 = [[UITextView alloc]initWithFrame:CGRectMake(10, 120, 150, 30)];
+    self.guest1.text = @"Matt";
+    self.guest1.editable = NO;
+    [self.view addSubview:self.guest1];
     
     self.feedback = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.feedback.frame = CGRectMake(150, 60, 200, 100);

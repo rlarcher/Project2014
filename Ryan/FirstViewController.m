@@ -15,6 +15,7 @@
 #import "PastLunchesViewController.h"
 #import "SettingsViewController.h"
 #import "AFNetworking.h"
+#import "User.h"
 
 @interface FirstViewController ()
 
@@ -100,7 +101,7 @@
         self.contact = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.contact.frame = CGRectMake(100, 285, 120, 50);
         [self.contact setTitle:@"Contact SitWith" forState:UIControlStateNormal];
-        [self.view addSubview:self.contact];
+        //[self.view addSubview:self.contact];
         
         // add target for contact button
         [self.contact addTarget:self action:@selector(showEmail:) forControlEvents:UIControlEventTouchUpInside];
@@ -231,7 +232,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSString *server = @"http://128.237.127.135:8888/SitWithWebServer/getAllLunchTable";
+    NSString *server = @"http://www.logarun.com/xml.ashx?username=ryan.archer&type=view";
     NSURL *url = [NSURL URLWithString:server];
     /*NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     
@@ -261,7 +262,8 @@
     }];
     
     [operation start];*/
-    NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+    NSData *xmlData = [NSData dataWithContentsOfURL:url];
+    NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];
     [parser setDelegate:self];
     BOOL result = [parser parse];
     if(result == NO)
@@ -276,6 +278,7 @@
     if([elementName isEqualToString:@"user"])
     {
         self.parsingUserData = YES;
+        self.currentUser = [[User alloc]init];
         return;
     }
     if([elementName isEqualToString:@"name"])
@@ -291,20 +294,26 @@
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     //NSLog(@"Did end element");
     // reached the end of the XML file
-    if([elementName isEqualToString:@"Users"]) return;
+    if([elementName isEqualToString:@"Users"])
+    {
+        if(self.foundUser == NO)
+        {
+            // did not find user so add to database
+        }
+    }
     if([elementName isEqualToString:@"name"])
     {
         // let app know that it is between name tags
         self.parsingUserName = NO;
         // this checks to see if user is in the xml table
-        if([self.userFromParse isEqualToString:userName])
+        if([[self.currentUser name] isEqualToString:userName])
         {
+            // user is in database
             self.foundUser = YES;
-            // now find a way to add the user to the database
-            
         }
         else {
             self.userFromParse = nil;
+            self.currentUser = nil;
         }
     }
     if([elementName isEqualToString:@"email"]) self.parsingEmail = NO;
@@ -317,10 +326,12 @@
         // add the found characters to the parsed UserName
         // this only occurs for string between xml name tags
         [self.userFromParse appendString:string];
+        [self.currentUser setName:string];
     }
     if(self.parsingEmail)
     {
         [userEmail appendString:string];
+        [self.currentUser setEmail:string];
         NSLog(string);
     }
 }

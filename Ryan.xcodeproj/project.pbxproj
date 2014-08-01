@@ -72,6 +72,7 @@
 		77879A63198A8B5B002AA39A /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A59198A8B5B002AA39A /* UIProgressView+AFNetworking.m */; };
 		77879A64198A8B5B002AA39A /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A5B198A8B5B002AA39A /* UIRefreshControl+AFNetworking.m */; };
 		77879A65198A8B5B002AA39A /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A5D198A8B5B002AA39A /* UIWebView+AFNetworking.m */; };
+		77879A68198BD611002AA39A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A67198BD611002AA39A /* User.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,8 @@
 		77879A5B198A8B5B002AA39A /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		77879A5C198A8B5B002AA39A /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		77879A5D198A8B5B002AA39A /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		77879A66198BD611002AA39A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		77879A67198BD611002AA39A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +255,8 @@
 				77170D41198192C300C288EE /* tablepic.png */,
 				77170CF6197591FD00C288EE /* AppDelegate.h */,
 				77170CF7197591FD00C288EE /* AppDelegate.m */,
+				77879A66198BD611002AA39A /* User.h */,
+				77879A67198BD611002AA39A /* User.m */,
 				77170D2F197FF7B400C288EE /* MyLunchViewController.h */,
 				77170D30197FF7B400C288EE /* MyLunchViewController.m */,
 				77170D281975A9CA00C288EE /* ThirdViewController.h */,
@@ -498,6 +503,7 @@
 				77879A60198A8B5B002AA39A /* UIAlertView+AFNetworking.m in Sources */,
 				77879A5E198A8B5B002AA39A /* AFNetworkActivityIndicatorManager.m in Sources */,
 				77879A44198A8B4B002AA39A /* AFHTTPRequestOperationManager.m in Sources */,
+				77879A68198BD611002AA39A /* User.m in Sources */,
 				77879A61198A8B5B002AA39A /* UIButton+AFNetworking.m in Sources */,
 				77879A5F198A8B5B002AA39A /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				77170D2A1975A9CA00C288EE /* ThirdViewController.m in Sources */,

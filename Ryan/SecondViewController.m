@@ -163,11 +163,49 @@
         self.registerAlert = [[UIAlertView alloc] initWithTitle:@"SitWith" message:
                               [NSString stringWithFormat:@"Confirm lunch for %@? ",beginTimes[0]] delegate:nil cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
-        
+        UISwipeGestureRecognizer *gestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self  action:@selector(swipeHandler:)];
+        [self.view addGestureRecognizer:gestureRecognizer];
         
 
     }
     return self;
+}
+
+ -(IBAction)swipeHandler:(UISwipeGestureRecognizer *)sender
+{
+    self.restaurantIndex += 1;
+    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    CGSize scaleSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+    [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.lunchPicture setImage:resizedImage];
+    [self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.locationName setText:restaurantNames[self.restaurantIndex]];
+    NSString *theCount = restaurantAvailability[self.restaurantIndex];
+    if([theCount isEqualToString:@"0"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];
+    }
+    if([theCount isEqualToString:@"1"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"1Table"]];
+    }
+    if([theCount isEqualToString:@"2"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"2Table"]];
+    }
+    if([theCount isEqualToString:@"3"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"3Table"]];
+    }
+    if([theCount isEqualToString:@"4"])
+    {
+        [self.availabilityPic setImage:[UIImage imageNamed:@"4Table"]];
+    }
+    [self.time setText:beginTimes[self.restaurantIndex]];
 }
 
     -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict

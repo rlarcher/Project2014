@@ -10,4 +10,6 @@
 
 @interface SettingsViewController : UIViewController
 @property (strong,nonatomic) UIButton *visit;
+@property (strong,nonatomic) UIButton *fqButton;
+@property (strong,nonatomic) UITextView *descriptionHeader;
 @end
