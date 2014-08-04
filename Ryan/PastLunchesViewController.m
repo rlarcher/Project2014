@@ -33,17 +33,18 @@
     self.title = @"Past Lunches";
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.pastLunchArray = @[@"Sharp Edge Bistro",@"Harris Grill"];
+    NSArray *guestArray = [[NSArray alloc]init];
+    guestArray = @[@"Matt",@"Joe"];
     
-    // past lunch text
-    self.lunch = [[UITextView alloc]initWithFrame:CGRectMake(10, 60, 150, 30)];
-    [self.lunch setBackgroundColor:[UIColor whiteColor]];
-    self.lunch.text = self.pastLunchArray[0];
-    [self.view addSubview:self.lunch];
+    self.guests = [[UITextView alloc]initWithFrame:CGRectMake(30, 160, 150, 50)];
+    self.guests.text = @"";
+    self.guests.editable = NO;
     
-    self.guest1 = [[UITextView alloc]initWithFrame:CGRectMake(10, 120, 150, 30)];
-    self.guest1.text = @"Matt";
-    self.guest1.editable = NO;
-    [self.view addSubview:self.guest1];
+    for (int i = 0; i < [guestArray count]; i += 1) {
+        self.guests.text = [NSString stringWithFormat:@"%@ %@",self.guests.text,guestArray[i]];
+    }
+    
+        [self.view addSubview:self.guests];
     
     self.feedback = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.feedback.frame = CGRectMake(150, 60, 200, 100);

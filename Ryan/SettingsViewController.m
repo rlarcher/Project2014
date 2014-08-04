@@ -41,6 +41,8 @@
     return self;
 }
 
+
+
 -(void)showfq:(UIButton *)sender
 {
     // make the view for the FAQ

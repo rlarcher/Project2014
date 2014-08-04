@@ -22,25 +22,34 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // initialize some stuff
+        self.parsingCount = NO;
         self.parsingAddress = NO;
         self.parsingRestaurant = NO;
         self.parsingName = NO;
         self.parsingPicture = NO;
         self.parsingTime = NO;
+        self.lunchObjects = [[NSMutableArray alloc]init];
         restaurantAvailability = [[NSMutableArray alloc]init];
         restaurantNames = [[NSMutableArray alloc] init];
         restaurantLocations = [[NSMutableArray alloc]init];
         restaurantPictures = [[NSMutableArray alloc]init];
         beginTimes = [[NSMutableArray alloc]init];
+        upcomingLunchObjects = [[NSMutableArray alloc]init];
         
-        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"lunchtable_list" ofType:@"xml"]];
-        NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+        NSString *server = @"http://54.191.127.201:8080/SitWithWebServer/getNotFilledUpcomingLunchTable?email=rarcher17@gmail.com";
+        
+        NSURL *url = [NSURL URLWithString:server];
+        NSData *xmlData = [NSData dataWithContentsOfURL:url];
+        NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];
         [parser setDelegate:self];
         BOOL result = [parser parse];
         if(!result) NSLog(@"Oh no that parse thing didn't go so well");
         
         self.title = @"Find Lunches";
         self.view.backgroundColor = [UIColor whiteColor];
+        
+        // get first lunch object to display initially
+        UpcomingLunch *firstLunch = upcomingLunchObjects[self.restaurantIndex];
         
         // set the back button so it goes to the home screen
         [self.navigationItem setHidesBackButton:YES];
@@ -56,8 +65,9 @@
         // set the array of pictures for number of seats taken
         self.availabilityArray = @[@"1Table",@"2Table",@"3Table",@"4Table"];
         
+        // display the picture for the number of seats left
         self.availabilityPic = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"emptyTable"]];
-        NSString *myCount = restaurantAvailability[self.restaurantIndex];
+        NSString *myCount = [firstLunch count];
         if([myCount isEqualToString:@"0"])
         {
             [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];
@@ -80,11 +90,17 @@
         }
         
         [self.availabilityPic setContentMode:UIViewContentModeScaleAspectFit];
-        self.availabilityPic.frame = CGRectMake(145,310,25,25);
+        self.availabilityPic.frame = CGRectMake(100,310,25,25);
         [self.view addSubview:self.availabilityPic];
         
+        self.remaining = [[UITextView alloc]init];
+        self.remaining.frame = CGRectMake(180, 310, 100, 100);
+        self.remaining.editable = NO;
+        self.remaining.text = @"4 seats left";
+        [self.view addSubview:self.remaining];
+        
         // display the lunch picture
-        UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xpf1/t1.0-9/1936792_101763893171479_5923274_n.jpg"]]];
+        UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[firstLunch picture]]]];
         CGSize scaleSize = CGSizeMake(200, 200);
         UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
         [firstLunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
@@ -99,7 +115,7 @@
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         CGFloat screenWidth = screenRect.size.width;
         self.locationName = [[UITextView alloc]initWithFrame:CGRectMake(0, 360, screenWidth, 70)];
-        [self.locationName setText:restaurantNames[self.restaurantIndex]];
+        [self.locationName setText:[firstLunch restaurantName]];
         [self.locationName setBackgroundColor:[UIColor whiteColor]];
         self.locationName.editable = NO;
         self.locationName.textAlignment = NSTextAlignmentCenter;
@@ -116,7 +132,7 @@
         
         // add time to the view
         self.time = [[UITextView alloc] initWithFrame:CGRectMake(0, 340, screenWidth, 30)];
-        [self.time setText:beginTimes[self.restaurantIndex]];
+        [self.time setText:[firstLunch time]];
         [self.time setBackgroundColor:[UIColor whiteColor]];
         self.time.editable = NO;
         self.time.textAlignment = NSTextAlignmentCenter;
@@ -142,50 +158,71 @@
         [prevLunch addTarget:self action:@selector(showPrevLunch:) forControlEvents:UIControlEventTouchUpInside];
         */
         
-        // button to sign up
+        // make the button to sign up
         UIButton *signUp = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         signUp.frame = CGRectMake(140, 420, 100, 44);
         [signUp setTitle:@"Join" forState:UIControlStateNormal];
         [self.view addSubview:signUp];
         
-        // target for sign up
+        // call the function when the user clicks the sign up button
         [signUp addTarget:self action:@selector(signUpLunch:) forControlEvents:UIControlEventTouchUpInside];
         
-        // button to make your own lunch
+        // create the button to make your own lunch
         UIButton *makeLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         makeLunch.frame = CGRectMake(60, 450, 200, 44);
         [makeLunch setTitle:@"Make Lunch" forState:UIControlStateNormal];
         [self.view addSubview:makeLunch];
         
-        // call function to change the view
+        // call function to change the view on button press
         [makeLunch addTarget:self action:@selector(makeLunch:) forControlEvents:UIControlEventTouchUpInside];
         
         // alert when lunch is selected
         self.registerAlert = [[UIAlertView alloc] initWithTitle:@"SitWith" message:
-                              [NSString stringWithFormat:@"Confirm lunch for %@? ",beginTimes[0]] delegate:nil cancelButtonTitle:@"No"
+                              [NSString stringWithFormat:@"Confirm lunch for %@? ",[firstLunch time]] delegate:nil cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
-        UISwipeGestureRecognizer *gestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self  action:@selector(swipeHandler:)];
-        [self.view addGestureRecognizer:gestureRecognizer];
         
-
+        self.registerAlert.transform = CGAffineTransformMakeTranslation(25, 25);
+        
+        self.fullAlert = [[UIAlertView alloc]initWithTitle:@"Lunch Full" message:@"This lunch is full" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        self.fullAlert.transform = CGAffineTransformMakeTranslation(25, 25);
+        
+        // right swipe
+        UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
+        rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        [rightRecognizer setNumberOfTouchesRequired:1];
+        // add to view
+        [self.view addGestureRecognizer:rightRecognizer];
+        
+        // left swipe
+        UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+        leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        [leftRecognizer setNumberOfTouchesRequired:1];
+        // add to view
+        [self.view addGestureRecognizer:leftRecognizer];
     }
     return self;
 }
 
- -(IBAction)swipeHandler:(UISwipeGestureRecognizer *)sender
+// this function is for the left swipe
+// same as when user presses skip button
+ -(IBAction)leftSwipeHandle:(UISwipeGestureRecognizer *)sender
 {
     self.restaurantIndex += 1;
-    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
-    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    // if user has cycled through all lunches
+    if(self.restaurantIndex >= [upcomingLunchObjects count]) self.restaurantIndex = 0;
+    // get the next lunch object
+    UpcomingLunch *newLunch = upcomingLunchObjects[self.restaurantIndex];
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[newLunch picture]]]];
     CGSize scaleSize = CGSizeMake(200, 200);
     UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
     [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [self.lunchPicture setImage:resizedImage];
-    [self.address setText:restaurantLocations[self.restaurantIndex]];
-    [self.locationName setText:restaurantNames[self.restaurantIndex]];
-    NSString *theCount = restaurantAvailability[self.restaurantIndex];
+    //[self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.locationName setText:[newLunch restaurantName]];
+    NSString *theCount = [newLunch count];
     if([theCount isEqualToString:@"0"])
     {
         [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];
@@ -206,14 +243,42 @@
     {
         [self.availabilityPic setImage:[UIImage imageNamed:@"4Table"]];
     }
-    [self.time setText:beginTimes[self.restaurantIndex]];
+    int num = [theCount intValue];
+    num = 4 - num;
+    self.remaining.text = [NSString stringWithFormat:@"%d seats left",num];
+    [self.time setText:[newLunch time]];
 }
 
-    -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
+// this button is for the right swipe
+// same as when user presses the join button
+ -(IBAction)rightSwipeHandle:(UISwipeGestureRecognizer *)sender
+{
+    UpcomingLunch *thisLunch = upcomingLunchObjects[self.restaurantIndex];
+    if(!([[thisLunch count] isEqualToString:@"4"]))
     {
+        self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",[thisLunch time]];
+        [self.registerAlert show];
+    }
+    else
+    {
+        [self.fullAlert show];
+    }
+}
+
+// function called when parser reaches the beginning of an element
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
+    {
+        if([elementName isEqualToString:@"LunchTable"])
+        {
+            self.currentLunch = [[UpcomingLunch alloc]init];
+        }
+        if([elementName isEqualToString:@"count"])
+        {
+            self.parsingCount = YES;
+        }
         if([elementName isEqualToString:@"Restaurant"])
         {
-            self.currentRestaurant = [[Restaurant alloc]init];
+            self.parsingRestaurant = YES;
         }
         if([elementName isEqualToString:@"restaurant_name"])
         {
@@ -236,9 +301,13 @@
             self.parsingAvailability = YES;
         }
     }
-    
-    -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-        //NSLog(@"Did end element");
+// parser reached the end of an element
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+        //NSLog(elementName);
+        if([elementName isEqualToString:@"count"])
+        {
+            self.parsingCount = NO;
+        }
         if([elementName isEqualToString:@"restaurant_name"])
         {
             self.parsingName = NO;
@@ -259,37 +328,48 @@
         {
             self.parsingAvailability = NO;
         }
+        if([elementName isEqualToString:@"LunchTable"])
+        {
+            [upcomingLunchObjects addObject:self.currentLunch];
+            self.currentLunch = nil;
+        }
     }
-    
-    -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+
+// this handles the characters between the XML tags
+-(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
     {
         if(self.parsingName)
         {
             [restaurantNames addObject:(NSString *)string];
-            [self.currentRestaurant setName:string];
+            [self.currentLunch setRestaurantName:(NSString *)string];
         }
         if(self.parsingAddress)
         {
-            [restaurantLocations addObject:(NSString *)string];
-            [self.currentRestaurant setAddress:string];
+            //[restaurantLocations addObject:(NSString *)string];
+            [self.currentLunch setAddress:(NSString *)string];
         }
         if(self.parsingPicture)
         {
-            [restaurantPictures addObject:(NSString *)string];
-            [self.currentRestaurant setPicture:string];
+            //[restaurantPictures addObject:(NSString *)string];
+            [self.currentLunch setPicture:(NSString *)string];
         }
         if(self.parsingTime)
         {
-            [beginTimes addObject:(NSString *)string];
-            [self.currentRestaurant setHours:string];
+            NSString *formattedTime = [string substringToIndex:[string length]-5];
+            //[beginTimes addObject:(NSString *)formattedTime];
+            [self.currentLunch setTime:formattedTime];
         }
         if(self.parsingAvailability)
         {
-            [restaurantAvailability addObject:(NSString *)string];
+            //[restaurantAvailability addObject:(NSString *)string];
+        }
+        if(self.parsingCount)
+        {
+            [self.currentLunch setCount:string];
         }
     }
     
-
+// handle the click on the alert
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)
@@ -309,44 +389,50 @@
     [self.time setText:self.lunchTimes[self.restaurantIndex]];
 }
 
+// when user presses the join button
 -(void)signUpLunch:(UIButton *)sender
 {
-    if(!([restaurantAvailability[self.restaurantIndex] isEqualToString:@"4"]))
+    UpcomingLunch *thisLunch = upcomingLunchObjects[self.restaurantIndex];
+    if(!([[thisLunch count] isEqualToString:@"4"]))
     {
-        self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",beginTimes[self.restaurantIndex]];
+        self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",[thisLunch time]];
+        [self.registerAlert show];
     }
     else
     {
-        self.registerAlert.message = @"This lunch is full";
+        [self.fullAlert show];
     }
-        [self.registerAlert show];
 }
 
+// when user presses the make lunch button
 - (void)makeLunch:(UIButton *)sender
 {
     ThirdViewController *thirdViewController = [[ThirdViewController alloc] init];
     [self.navigationController pushViewController:thirdViewController animated:YES];
 }
 
+// send app back to the home screen
 -(void)home:(UIBarButtonItem *)sender {
     FirstViewController *firstViewController = [[FirstViewController alloc] init];
     [self.navigationController pushViewController:firstViewController animated:YES];
 }
 
+// show the next lunch when user presses skip
 - (void)showNextLunch:(UIButton *)sender
 {
     self.restaurantIndex += 1;
-    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
-    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    if(self.restaurantIndex >= [upcomingLunchObjects count]) self.restaurantIndex = 0;
+    UpcomingLunch *newLunch = upcomingLunchObjects[self.restaurantIndex];
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[newLunch picture]]]];
     CGSize scaleSize = CGSizeMake(200, 200);
     UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
     [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [self.lunchPicture setImage:resizedImage];
-    [self.address setText:restaurantLocations[self.restaurantIndex]];
-    [self.locationName setText:restaurantNames[self.restaurantIndex]];
-    NSString *theCount = restaurantAvailability[self.restaurantIndex];
+    //[self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.locationName setText:[newLunch restaurantName]];
+    NSString *theCount = [newLunch count];
     if([theCount isEqualToString:@"0"])
     {
         [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];
@@ -367,9 +453,14 @@
     {
         [self.availabilityPic setImage:[UIImage imageNamed:@"4Table"]];
     }
-    [self.time setText:beginTimes[self.restaurantIndex]];
+    int num = [theCount intValue];
+    num = 4 - num;
+    self.remaining.text = [NSString stringWithFormat:@"%d seats left",num];
+    [self.time setText:[newLunch time]];
 }
 
+/*
+ FOR NOW THERE IS NO PREVIOUS LUNCH BUTTON
 -(void)showPrevLunch:(UIButton *)sender
 {
     self.restaurantIndex -= 1;
@@ -385,7 +476,7 @@
     [self.locationName setText:restaurantNames[self.restaurantIndex]];
     [self.time setText:self.lunchTimes[self.restaurantIndex]];
 }
-
+*/
 - (void)viewDidLoad
 {
     [super viewDidLoad];

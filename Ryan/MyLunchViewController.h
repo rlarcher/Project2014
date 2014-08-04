@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyLunchViewController : UIViewController
+@interface MyLunchViewController : UIViewController <NSXMLParserDelegate>
 @property (strong,nonatomic) UIButton *cancel;
 @property (strong,nonatomic) UITextView *lunch;
+@property (strong,nonatomic) UIAlertView *confirm;
+@property (strong,nonatomic) UIViewController *confirmView;
 @end

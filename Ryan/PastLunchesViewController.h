@@ -12,7 +12,7 @@
 @property NSArray *pastLunchArray;
 @property (strong,nonatomic) UITextView *lunch;
 @property (strong,nonatomic) UIButton *feedback;
-@property (strong,nonatomic) UITextView *guest1;
+@property (strong,nonatomic) UITextView *guests;
 @property BOOL foundUser;
 @property BOOL parsingUserData;
 @property BOOL parsingUserName;

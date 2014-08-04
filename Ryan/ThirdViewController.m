@@ -40,7 +40,7 @@
     // Do any additional setup after loading the view.
     self.title = @"Make Lunch";
     self.restaurantIndex = 0;
-    
+
     // display the lunch picture
     UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xpf1/t1.0-9/1936792_101763893171479_5923274_n.jpg"]]];
     CGSize scaleSize = CGSizeMake(200, 200);
@@ -101,7 +101,41 @@
     
     self.badTime = [[UIAlertView alloc] initWithTitle:@"Invalid Time" message:@"Please select a time between 12 and 4" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
+    // right swipe
+    UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
+    rightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [rightRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:rightRecognizer];
     
+    // left swipe
+    UISwipeGestureRecognizer *leftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandle:)];
+    leftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [leftRecognizer setNumberOfTouchesRequired:1];
+    [self.view addGestureRecognizer:leftRecognizer];
+    
+}
+
+ -(IBAction)leftSwipeHandle:(UISwipeGestureRecognizer *)sender
+{
+    // change the restaurant information displayed
+    self.restaurantIndex += 1;
+    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    CGSize scaleSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+    [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.lunchPicture setImage:resizedImage];
+    [self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.locationName setText:restaurantNames[self.restaurantIndex]];
+}
+
+-(IBAction)rightSwipeHandle:(UISwipeGestureRecognizer *)sender
+{
+    chosenRestaurant = restaurantNames[self.restaurantIndex];
+    RegisterViewController *registerViewController = [[RegisterViewController alloc]init];
+    [self.navigationController pushViewController:registerViewController animated:YES];
 }
 
 - (void)changeChosenDate:(id)sender {
@@ -114,7 +148,6 @@
         [self.badTime show];
         return;
     }
-    NSLog(@"hour is %d",[dateComps hour]);
     chosenDate = self.dateAndTime.date;
 }
 

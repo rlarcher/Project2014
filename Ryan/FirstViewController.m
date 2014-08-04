@@ -14,7 +14,6 @@
 #import <FacebookSDK/FBSession.h>
 #import "PastLunchesViewController.h"
 #import "SettingsViewController.h"
-#import "AFNetworking.h"
 #import "User.h"
 
 @interface FirstViewController ()
@@ -105,6 +104,8 @@
         
         // add target for contact button
         [self.contact addTarget:self action:@selector(showEmail:) forControlEvents:UIControlEventTouchUpInside];
+        
+        NSLog(userEmail);
     }
     return self;
 }
@@ -197,7 +198,7 @@
     // set the welcome message with the user name
     userName = (NSMutableString *)user.name;
     self.nameLabel.text = [NSString stringWithFormat:@"Welcome %@",user.first_name];
-    userEmail = user[@"email"];
+    userEmail = [user objectForKey:@"email"];
 }
 
 -(void) showSettings:(UIButton *)sender
@@ -232,36 +233,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.0 green:0.69 blue:0.28 alpha:0.2]];
+    
     NSString *server = @"http://www.logarun.com/xml.ashx?username=ryan.archer&type=view";
+    
     NSURL *url = [NSURL URLWithString:server];
-    /*NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    
-    // Make sure to set the responseSerializer correctly
-    operation.responseSerializer = [AFXMLParserResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSXMLParser *parser = (NSXMLParser *)responseObject;
-        [parser setDelegate:self];
-        [parser parse];
-        
-        NSLog(@"It worked");
-
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error.localizedDescription);
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Data"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-        
-    }];
-    
-    [operation start];*/
     NSData *xmlData = [NSData dataWithContentsOfURL:url];
     NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];
     [parser setDelegate:self];
@@ -274,7 +250,7 @@
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    NSLog(@"Did start element");
+    //NSLog(@"Did start element");
     if([elementName isEqualToString:@"user"])
     {
         self.parsingUserData = YES;
