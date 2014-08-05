@@ -31,6 +31,16 @@
     return date;
 }
 
+- (NSString *)lunchtable_id
+{
+    return lunchtable_id;
+}
+
+- (NSString *)restaurant_id
+{
+    return restaurant_id;
+}
+
 // set methods
 - (void)setUserName:(NSString *)input
 {
@@ -51,4 +61,13 @@
     date = input;
 }
 
+- (void)setLunctable_id:(NSString *)input
+{
+    lunchtable_id = input;
+}
+
+- (void)setRestaurant_id:(NSString *)input
+{
+    restaurant_id = input;
+}
 @end

@@ -30,23 +30,27 @@
         self.upcomingLunchIndex = 0;
         userUpcomingLunchObjects = [[NSMutableArray alloc]init];
         
-        NSString *sampleEmail = @"lippmanj@hotmail.com";
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getUpcomingRequestTobeProcessedByEmail?email=%@",sampleEmail]];
+        NSString *theEmail = @"lippmanj@hotmail.com";
+        // for now this is a sample email but it will eventually be the line of code below
+        // NSString *theEmail = userEmail;
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getUpcomingRequestTobeProcessedByEmail?email=%@",theEmail]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
         BOOL result = [parser parse];
-        if(!result) NSLog(@"Oh no that parse thing didn't go so well");
+        if(!result) NSLog(@"Oh no that parse thing didn't go so well :(");
     }
     return self;
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    NSLog(elementName);
+    NSLog(@"%@",elementName);
+    // create new upcoming lunch object
     if([elementName isEqualToString:@"RequestTobeProcessed"])
     {
         self.currentUpcomingLunch = [[UserUpcomingLunch alloc]init];
     }
+    // set booleans based on tags
     if([elementName isEqualToString:@"lunchtabletime"])
     {
         self.parsingDate = YES;
@@ -63,16 +67,26 @@
     {
         self.parsingRestaurant = YES;
     }
+    if([elementName isEqualToString:@"lunchtable_id"])
+    {
+        self.parsingLunchtable_id = YES;
+    }
+    if([elementName isEqualToString:@"restaurant_id"])
+    {
+        self.parsingRestaurant_id = YES;
+    }
     
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
 {
+    // add the current object to the array of upcoming lunch objects
     if([elementName isEqualToString:@"RequestTobeProcessed"])
     {
         [userUpcomingLunchObjects addObject:self.currentUpcomingLunch];
         self.currentUpcomingLunch = nil;
     }
+    // set booleans at the end of each tag
     if([elementName isEqualToString:@"lunchtabletime"])
     {
         self.parsingDate = NO;
@@ -89,10 +103,19 @@
     {
         self.parsingRestaurant = NO;
     }
+    if([elementName isEqualToString:@"lunchtable_id"])
+    {
+        self.parsingLunchtable_id = YES;
+    }
+    if([elementName isEqualToString:@"restaurant_id"])
+    {
+        self.parsingRestaurant_id = YES;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
+    // booleans will determine which tag the parser is inside
     if(self.parsingDate)
     {
         [self.currentUpcomingLunch setDate:(NSString *)string];
@@ -108,6 +131,14 @@
     if(self.parsingUserName)
     {
         [self.currentUpcomingLunch setUserName:(NSString *)string];
+    }
+    if(self.parsingRestaurant_id)
+    {
+        [self.currentUpcomingLunch setRestaurant_id:(NSString *)string];
+    }
+    if(self.parsingLunchtable_id)
+    {
+        [self.currentUpcomingLunch setLunctable_id:(NSString *)string];
     }
 }
 
@@ -158,9 +189,13 @@
 }
 
 - (void)nextLunch:(UIButton *)sender {
+    // this will scroll through the user's upcoming lunches
+    
+    // make sure the user has some upcoming lunches
     if([userUpcomingLunchObjects count] != 0)
     {
         self.upcomingLunchIndex += 1;
+        // wrap-around when user reaches last lunch
         if(self.upcomingLunchIndex >= [userUpcomingLunchObjects count]) self.upcomingLunchIndex = 0;
         UserUpcomingLunch *nextUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
         self.lunch.text = [NSString stringWithFormat:@"%@ %@",[nextUpcomingLunch restaurant],[nextUpcomingLunch date]];

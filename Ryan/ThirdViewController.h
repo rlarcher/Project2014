@@ -15,6 +15,7 @@
 @property (strong,nonatomic) UIButton *restaurant3;
 @property (strong,nonatomic) UILabel *choose;
 @property (strong,nonatomic) UIDatePicker *dateAndTime;
+@property (strong,nonatomic) UIPickerView *lunchDate;
 @property (strong,nonatomic) UIAlertView *badTime;
 @property (strong,nonatomic) UITextView *locationName;
 @property (strong,nonatomic) UIImageView *lunchPicture;

@@ -181,17 +181,40 @@
     // add target for choose restaurant
     [self.chooseRestaurant addTarget:self action:@selector(makeLunch:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+    // date picker for the user to select the date and time
     self.dateAndTime = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 390, 300, 40)];
     self.dateAndTime.datePickerMode = UIDatePickerModeDateAndTime;
     self.dateAndTime.hidden = NO;
     self.dateAndTime.minuteInterval = 30;
-    self.dateAndTime.minimumDate = [NSDate date];
-    chosenDate = [NSDate date];
-    self.dateAndTime.date = [NSDate date];
+    
+    // get current date
+    NSDate *date = [NSDate date];
+    // initialize a calendar
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    // get components of current date
+    NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: date];
+    // keep the date but change the time to 11:00
+    [components setHour: 11];
+    [components setMinute: 0];
+    [components setSecond: 0];
+    NSDate *newDate = [gregorian dateFromComponents: components];
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    
+    // add two weeks to current date and make it the minimum date available
+    dayComponent.day = 14;
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:newDate options:0];
+    self.dateAndTime.minimumDate = nextDate;
+    
+    chosenDate = nextDate;
     [self.view addSubview:self.dateAndTime];
+    
+    // add the handler for the date picker
     [self.dateAndTime addTarget:self action:@selector(changeChosenDate:) forControlEvents:UIControlEventValueChanged];
     
-    self.badTime = [[UIAlertView alloc] initWithTitle:@"Invalid Time" message:@"Please select a time between 12 and 4" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    // alert to tell users that the time selected is invalid
+    self.badTime = [[UIAlertView alloc] initWithTitle:@"Invalid Time" message:@"Please select a time between 11 and 2" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     // right swipe
     UISwipeGestureRecognizer *rightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(rightSwipeHandle:)];
@@ -235,8 +258,8 @@
     // set up date formatter
     NSCalendar *gregorianCal = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *dateComps = [gregorianCal components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:self.dateAndTime.date];
-    // if hour is not between 12 and 4 alert user
-    if([dateComps hour] > 16 || [dateComps hour] < 12)
+    // if hour is not between 11 and 2 alert user
+    if([dateComps hour] > 14 || [dateComps hour] < 11)
     {
         [self.badTime show];
         return;

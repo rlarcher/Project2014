@@ -14,6 +14,8 @@
     NSString *email;
     NSString *restaurant;
     NSString *date;
+    NSString *lunchtable_id;
+    NSString *restaurant_id;
 }
 
 // get methods
@@ -25,6 +27,10 @@
 
 - (NSString *)date;
 
+- (NSString *)lunchtable_id;
+
+- (NSString *)restaurant_id;
+
 // set methods
 - (void)setUserName:(NSString *)input;
 
@@ -33,4 +39,9 @@
 - (void)setRestaurant:(NSString *)input;
 
 - (void)setDate:(NSString *)input;
+
+- (void)setLunctable_id:(NSString *)input;
+
+- (void)setRestaurant_id:(NSString *)input;
+
 @end
