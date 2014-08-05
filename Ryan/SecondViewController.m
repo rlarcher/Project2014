@@ -10,6 +10,7 @@
 #import "SecondViewController.h"
 #import "ThirdViewController.h"
 #import "Restaurant.h"
+#import "ConfirmAlertViewController.h"
 
 @interface SecondViewController ()
 
@@ -49,6 +50,10 @@
         
         // get first lunch object to display initially
         UpcomingLunch *firstLunch = upcomingLunchObjects[self.restaurantIndex];
+        
+        // this is the global that holds the date and time
+        lunchDateAndTime = [[NSString alloc]init];
+        lunchDateAndTime = [firstLunch time];
         
         // set the back button so it goes to the home screen
         [self.navigationItem setHidesBackButton:YES];
@@ -256,7 +261,11 @@
     if(!([[thisLunch count] isEqualToString:@"4"]))
     {
         self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",[thisLunch time]];
-        [self.registerAlert show];
+        //[self.registerAlert show];
+        self.restaurantIndex += 1;
+        if(self.restaurantIndex >= [upcomingLunchObjects count]) self.restaurantIndex = 0;
+        ConfirmAlertViewController *confirmAlertViewController = [[ConfirmAlertViewController alloc]init];
+        [self.navigationController pushViewController:confirmAlertViewController animated:YES];
     }
     else
     {
@@ -395,7 +404,11 @@
     if(!([[thisLunch count] isEqualToString:@"4"]))
     {
         self.registerAlert.message = [NSString stringWithFormat:@"Confirm lunch for %@?",[thisLunch time]];
-        [self.registerAlert show];
+        //[self.registerAlert show];
+        self.restaurantIndex += 1;
+        if(self.restaurantIndex >= [upcomingLunchObjects count]) self.restaurantIndex = 0;
+        ConfirmAlertViewController *confirmAlertViewController = [[ConfirmAlertViewController alloc]init];
+        [self.navigationController pushViewController:confirmAlertViewController animated:YES];
     }
     else
     {

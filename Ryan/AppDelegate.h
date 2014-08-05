@@ -14,6 +14,7 @@ NSArray *possibleHours;
 NSArray *possibleMinutes;
 NSArray *ampm;
 NSDate *chosenDate;
+NSString *lunchDateAndTime;
 NSMutableString *userName;
 NSMutableString *userEmail;
 // arrays that will hold data taken from xml files

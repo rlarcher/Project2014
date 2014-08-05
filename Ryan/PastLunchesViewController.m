@@ -60,8 +60,8 @@
     PastLunch *firstPastLunch = userPastLunchObjects[self.pastLunchIndex];
     
     // create the text view for the guests and add it to the view
-    self.myText = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 400, 150)];
-    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with\n%@\n%@\n%@\n%@",[firstPastLunch restaurantName],[firstPastLunch user1FirstName],[firstPastLunch user2FirstName],[firstPastLunch user3FirstName],[firstPastLunch user4FirstName]];
+    self.myText = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 200, 150)];
+    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with %@, %@, %@, and %@",[firstPastLunch restaurantName],[firstPastLunch user1FirstName],[firstPastLunch user2FirstName],[firstPastLunch user3FirstName],[firstPastLunch user4FirstName]];
     self.myText.editable = NO;
     [self.view addSubview:self.myText];
     
@@ -96,7 +96,7 @@
     self.pastLunchIndex += 1;
     if(self.pastLunchIndex >= [userPastLunchObjects count]) self.pastLunchIndex = 0;
     PastLunch *newPastLunch = userPastLunchObjects[self.pastLunchIndex];
-    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with\n%@\n%@\n%@\n%@", [newPastLunch restaurantName],[newPastLunch user1FirstName],[newPastLunch user2FirstName],[newPastLunch user3FirstName],[newPastLunch user4FirstName]];
+    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with %@, %@, %@, and %@", [newPastLunch restaurantName],[newPastLunch user1FirstName],[newPastLunch user2FirstName],[newPastLunch user3FirstName],[newPastLunch user4FirstName]];
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
