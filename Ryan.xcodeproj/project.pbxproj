@@ -53,6 +53,9 @@
 		77170D631988203A00C288EE /* one_restaurant.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D541988118100C288EE /* one_restaurant.xml */; };
 		77170D641988203A00C288EE /* one_lunchtable.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D551988118100C288EE /* one_lunchtable.xml */; };
 		77170D651988203A00C288EE /* lunchtable_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D561988118100C288EE /* lunchtable_list.xml */; };
+		778171021990127C0027506D /* PastLunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 778171011990127C0027506D /* PastLunch.m */; };
+		7781710519911F6B0027506D /* MyMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710419911F6B0027506D /* MyMailViewController.m */; };
+		77817108199128340027506D /* UserUpcomingLunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77817107199128340027506D /* UserUpcomingLunch.m */; };
 		778799F219894A6A002AA39A /* emptyTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 778799F119894A6A002AA39A /* emptyTable.png */; };
 		778799F5198972B4002AA39A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778799F4198972B4002AA39A /* SettingsViewController.m */; };
 		77879A68198BD611002AA39A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A67198BD611002AA39A /* User.m */; };
@@ -120,6 +123,12 @@
 		77170D541988118100C288EE /* one_restaurant.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = one_restaurant.xml; path = ../../Downloads/one_restaurant.xml; sourceTree = "<group>"; };
 		77170D551988118100C288EE /* one_lunchtable.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = one_lunchtable.xml; path = ../../Downloads/one_lunchtable.xml; sourceTree = "<group>"; };
 		77170D561988118100C288EE /* lunchtable_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = lunchtable_list.xml; path = ../../Downloads/lunchtable_list.xml; sourceTree = "<group>"; };
+		778171001990127C0027506D /* PastLunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastLunch.h; sourceTree = "<group>"; };
+		778171011990127C0027506D /* PastLunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastLunch.m; sourceTree = "<group>"; };
+		7781710319911F6B0027506D /* MyMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMailViewController.h; sourceTree = "<group>"; };
+		7781710419911F6B0027506D /* MyMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMailViewController.m; sourceTree = "<group>"; };
+		77817106199128340027506D /* UserUpcomingLunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserUpcomingLunch.h; sourceTree = "<group>"; };
+		77817107199128340027506D /* UserUpcomingLunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserUpcomingLunch.m; sourceTree = "<group>"; };
 		778799F119894A6A002AA39A /* emptyTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emptyTable.png; path = "../../SitWith Pics/emptyTable.png"; sourceTree = "<group>"; };
 		778799F3198972B4002AA39A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		778799F4198972B4002AA39A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -208,8 +217,12 @@
 				77170CF7197591FD00C288EE /* AppDelegate.m */,
 				77879A66198BD611002AA39A /* User.h */,
 				77879A67198BD611002AA39A /* User.m */,
+				778171001990127C0027506D /* PastLunch.h */,
+				778171011990127C0027506D /* PastLunch.m */,
 				77170D2F197FF7B400C288EE /* MyLunchViewController.h */,
 				77170D30197FF7B400C288EE /* MyLunchViewController.m */,
+				77817106199128340027506D /* UserUpcomingLunch.h */,
+				77817107199128340027506D /* UserUpcomingLunch.m */,
 				77170D281975A9CA00C288EE /* ThirdViewController.h */,
 				77170D291975A9CA00C288EE /* ThirdViewController.m */,
 				77170D3819801F3C00C288EE /* RegisterViewController.h */,
@@ -220,6 +233,8 @@
 				77879A6D198FE83D002AA39A /* UpcomingLunch.m */,
 				77170D221975A8C400C288EE /* FirstViewController.h */,
 				77170D231975A8C400C288EE /* FirstViewController.m */,
+				7781710319911F6B0027506D /* MyMailViewController.h */,
+				7781710419911F6B0027506D /* MyMailViewController.m */,
 				77879A69198BDF7D002AA39A /* Restaurant.h */,
 				77879A6A198BDF7D002AA39A /* Restaurant.m */,
 				778799F3198972B4002AA39A /* SettingsViewController.h */,
@@ -403,15 +418,18 @@
 				77170D271975A96E00C288EE /* SecondViewController.m in Sources */,
 				77170CFE197591FE00C288EE /* ViewController.m in Sources */,
 				77879A68198BD611002AA39A /* User.m in Sources */,
+				7781710519911F6B0027506D /* MyMailViewController.m in Sources */,
 				77170D2A1975A9CA00C288EE /* ThirdViewController.m in Sources */,
 				77170D31197FF7B400C288EE /* MyLunchViewController.m in Sources */,
 				77170CF8197591FD00C288EE /* AppDelegate.m in Sources */,
 				77170CF4197591FD00C288EE /* main.m in Sources */,
 				77170D401981665F00C288EE /* PastLunchesViewController.m in Sources */,
+				77817108199128340027506D /* UserUpcomingLunch.m in Sources */,
 				778799F5198972B4002AA39A /* SettingsViewController.m in Sources */,
 				77170D241975A8C400C288EE /* FirstViewController.m in Sources */,
 				77879A6B198BDF7D002AA39A /* Restaurant.m in Sources */,
 				77879A6E198FE83D002AA39A /* UpcomingLunch.m in Sources */,
+				778171021990127C0027506D /* PastLunch.m in Sources */,
 				77170D3A19801F3C00C288EE /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

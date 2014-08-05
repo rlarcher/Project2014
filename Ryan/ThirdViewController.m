@@ -9,6 +9,7 @@
 #import "ThirdViewController.h"
 #import "AppDelegate.h"
 #import "RegisterViewController.h"
+#import "Restaurant.h"
 
 @interface ThirdViewController ()
 
@@ -24,6 +25,22 @@
         self.title = @"Create a Lunch";
         self.view.backgroundColor = [UIColor whiteColor];
         
+        restaurantObjects = [[NSMutableArray alloc]init];
+        
+        // set parsing booleans false
+        self.parsingAddress = NO;
+        self.parsingHours = NO;
+        self.parsingName = NO;
+        self.parsingPicture = NO;
+        
+        NSString *server = @"http://54.191.127.201:8080/SitWithWebServer/getRestaurants";
+        NSURL *url = [NSURL URLWithString:server];
+        NSData *xmlData = [NSData dataWithContentsOfURL:url];
+        NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];
+        [parser setDelegate:self];
+        BOOL result = [parser parse];
+        if(!result) NSLog(@"Oh no that parse thing didn't go so well");
+        
         // tell them to choose a location
         self.choose = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 350, 50)];
         self.choose.text = @"Choose a location and time for your lunch";
@@ -34,6 +51,78 @@
     return self;
 }
 
+// function called when parser reaches the beginning of an element
+-(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
+{
+    if([elementName isEqualToString:@"Restaurant"])
+    {
+        self.currentRestaurant = [[Restaurant alloc] init];
+    }
+    if([elementName isEqualToString:@"name"])
+    {
+        self.parsingName = YES;
+    }
+    if([elementName isEqualToString:@"address"])
+    {
+        self.parsingAddress = YES;
+    }
+    if([elementName isEqualToString:@"hours"])
+    {
+        self.parsingHours = YES;
+    }
+    if([elementName isEqualToString:@"picture"])
+    {
+        self.parsingPicture = YES;
+    }
+}
+
+// parser reached the end of an element
+-(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    if([elementName isEqualToString:@"Restaurant"])
+    {
+        [restaurantObjects addObject:self.currentRestaurant];
+        self.currentRestaurant = nil;
+        
+    }
+    if([elementName isEqualToString:@"name"])
+    {
+        self.parsingName = NO;
+    }
+    if([elementName isEqualToString:@"address"])
+    {
+        self.parsingAddress = NO;
+    }
+    if([elementName isEqualToString:@"hours"])
+    {
+        self.parsingHours = NO;
+    }
+    if([elementName isEqualToString:@"picture"])
+    {
+        self.parsingPicture = NO;
+    }
+}
+
+// this handles the characters between the XML tags
+-(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    if(self.parsingAddress)
+    {
+        [self.currentRestaurant setAddress:string];
+    }
+    if(self.parsingHours)
+    {
+        [self.currentRestaurant setHours:string];
+    }
+    if(self.parsingName)
+    {
+        [self.currentRestaurant setName:string];
+    }
+    if(self.parsingPicture)
+    {
+        [self.currentRestaurant setPicture:string];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -41,8 +130,11 @@
     self.title = @"Make Lunch";
     self.restaurantIndex = 0;
 
+    // get the first restaurant object for initial display
+    Restaurant *firstRestaurant = restaurantObjects[self.restaurantIndex];
+    
     // display the lunch picture
-    UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xpf1/t1.0-9/1936792_101763893171479_5923274_n.jpg"]]];
+    UIImage *firstLunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[firstRestaurant picture]]]];
     CGSize scaleSize = CGSizeMake(200, 200);
     UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
     [firstLunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
@@ -57,7 +149,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     self.locationName = [[UITextView alloc]initWithFrame:CGRectMake(0, 340, screenWidth, 50)];
-    [self.locationName setText:restaurantNames[self.restaurantIndex]];
+    [self.locationName setText:[firstRestaurant name]];
     [self.locationName setBackgroundColor:[UIColor whiteColor]];
     self.locationName.editable = NO;
     self.locationName.textAlignment = NSTextAlignmentCenter;
@@ -66,7 +158,7 @@
     
     // restaurant address
     self.address = [[UITextView alloc] initWithFrame:CGRectMake(0, 370,screenWidth, 40)];
-    [self.address setText:restaurantLocations[self.restaurantIndex]];
+    [self.address setText:[firstRestaurant address]];
     [self.address setBackgroundColor:[UIColor whiteColor]];
     self.address.editable = NO;
     self.address.textAlignment = NSTextAlignmentCenter;
@@ -119,16 +211,17 @@
 {
     // change the restaurant information displayed
     self.restaurantIndex += 1;
-    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
-    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
+    if(self.restaurantIndex >= [restaurantObjects count]) self.restaurantIndex = 0;
+    Restaurant *newRestaurant = restaurantObjects[self.restaurantIndex];
+    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[newRestaurant picture]]]];
     CGSize scaleSize = CGSizeMake(200, 200);
     UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
     [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
     UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     [self.lunchPicture setImage:resizedImage];
-    [self.address setText:restaurantLocations[self.restaurantIndex]];
-    [self.locationName setText:restaurantNames[self.restaurantIndex]];
+    [self.address setText:[newRestaurant address]];
+    [self.locationName setText:[newRestaurant name]];
 }
 
 -(IBAction)rightSwipeHandle:(UISwipeGestureRecognizer *)sender
@@ -154,18 +247,18 @@
 -(void)changeRestaurant:(UIButton *)sender
 {
     // change the restaurant information displayed
-    self.restaurantIndex += 1;
-    if(self.restaurantIndex >= [restaurantPictures count]) self.restaurantIndex = 0;
-    UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:restaurantPictures[self.restaurantIndex]]]];
-    CGSize scaleSize = CGSizeMake(200, 200);
-    UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
-    [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
-    UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    [self.lunchPicture setImage:resizedImage];
-    [self.address setText:restaurantLocations[self.restaurantIndex]];
-    [self.locationName setText:restaurantNames[self.restaurantIndex]];
-    
+        self.restaurantIndex += 1;
+        if(self.restaurantIndex >= [restaurantObjects count]) self.restaurantIndex = 0;
+        Restaurant *newRestaurant = restaurantObjects[self.restaurantIndex];
+        UIImage *lunchPicture = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[newRestaurant picture]]]];
+        CGSize scaleSize = CGSizeMake(200, 200);
+        UIGraphicsBeginImageContextWithOptions(scaleSize, NO, 0.0);
+        [lunchPicture drawInRect:CGRectMake(20, 20, scaleSize.width, scaleSize.height)];
+        UIImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [self.lunchPicture setImage:resizedImage];
+        [self.address setText:[newRestaurant address]];
+        [self.locationName setText:[newRestaurant name]];
 }
 
 - (void)makeLunch:(UIButton *)sender
@@ -203,6 +296,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

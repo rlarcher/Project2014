@@ -8,6 +8,8 @@
 
 #import "PastLunchesViewController.h"
 #import "AppDelegate.h"
+#import "MyMailViewController.h"
+#import "FirstViewController.h"
 
 @interface PastLunchesViewController ()
 
@@ -22,6 +24,26 @@
         // Custom initialization
         self.parsingUserData = false;
         self.foundUser = false;
+        self.parsingDate = NO;
+        self.parsingRestaurantName = NO;
+        self.parsingUser1 = NO;
+        self.parsingUser2 = NO;
+        self.parsingUser3 = NO;
+        self.parsingUser4 = NO;
+        self.pastLunchIndex = 0;
+        
+        // array that will hold user past lunches
+        // this will contain objects of type PastLunch
+        userPastLunchObjects = [[NSMutableArray alloc]init];
+        
+        // start the parsing
+        NSString *sampleEmail = @"terryyangty619@gmail.com";
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getPastTableByUserEmail?email=%@",sampleEmail]];
+        NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+        [parser setDelegate:self];
+        BOOL result = [parser parse];
+        if(!result) NSLog(@"Oh no that parse thing didn't go so well");
+        
     }
     return self;
 }
@@ -33,71 +55,139 @@
     self.title = @"Past Lunches";
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.pastLunchArray = @[@"Sharp Edge Bistro",@"Harris Grill"];
-    NSArray *guestArray = [[NSArray alloc]init];
-    guestArray = @[@"Matt",@"Joe"];
     
-    self.guests = [[UITextView alloc]initWithFrame:CGRectMake(30, 160, 150, 50)];
-    self.guests.text = @"";
-    self.guests.editable = NO;
+    // get the initial past lunch object
+    PastLunch *firstPastLunch = userPastLunchObjects[self.pastLunchIndex];
     
-    for (int i = 0; i < [guestArray count]; i += 1) {
-        self.guests.text = [NSString stringWithFormat:@"%@ %@",self.guests.text,guestArray[i]];
-    }
+    // create the text view for the guests and add it to the view
+    self.myText = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 400, 150)];
+    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with\n%@\n%@\n%@\n%@",[firstPastLunch restaurantName],[firstPastLunch user1FirstName],[firstPastLunch user2FirstName],[firstPastLunch user3FirstName],[firstPastLunch user4FirstName]];
+    self.myText.editable = NO;
+    [self.view addSubview:self.myText];
     
-        [self.view addSubview:self.guests];
-    
+    // button to send feedback
     self.feedback = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.feedback.frame = CGRectMake(150, 60, 200, 100);
+    self.feedback.frame = CGRectMake(150, 100, 200, 100);
     [self.feedback setTitle:@"Send Feedback" forState:UIControlStateNormal];
     [self.view addSubview:self.feedback];
     
-    NSURL *url = [[NSURL alloc]initWithString:@"http://www.logarun.com/xml.ashx?username=ryan.archer&type=view"];
-    NSXMLParser *parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-    [parser setDelegate:self];
-    BOOL result = [parser parse];
-    if(!result) NSLog(@"Oops the parse didn't work :(");
+    // add target to the feedback button
+    [self.feedback addTarget:self action:@selector(sendFeedback:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // button to show the next past lunch
+    UIButton *nextPastLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    nextPastLunch.frame = CGRectMake(60, 180, 200, 60);
+    [nextPastLunch setTitle:@"Next Past Lunch" forState:UIControlStateNormal];
+    [self.view addSubview:nextPastLunch];
+    
+    // add the target for the next past lunch button
+    [nextPastLunch addTarget:self action:@selector(nextLunch:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(void)sendFeedback:(UIButton *)sender
+{
+    MyMailViewController *mailViewController = [[MyMailViewController alloc]init];
+    [self.navigationController pushViewController:mailViewController animated:YES];
+}
+
+-(void)nextLunch:(UIButton *)sender
+{
+    self.pastLunchIndex += 1;
+    if(self.pastLunchIndex >= [userPastLunchObjects count]) self.pastLunchIndex = 0;
+    PastLunch *newPastLunch = userPastLunchObjects[self.pastLunchIndex];
+    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with\n%@\n%@\n%@\n%@", [newPastLunch restaurantName],[newPastLunch user1FirstName],[newPastLunch user2FirstName],[newPastLunch user3FirstName],[newPastLunch user4FirstName]];
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    //NSLog(@"Did start element");
-    if([elementName isEqualToString:@"user"])
+    if([elementName isEqualToString:@"LunchTable"])
     {
-        self.parsingUserData = YES;
-        return;
+        self.userPastLunch = [[PastLunch alloc]init];
     }
-    if([elementName isEqualToString:@"name"])
+    if([elementName isEqualToString:@"restaurant_name"])
     {
-        self.parsingUserName = YES;
+        self.parsingRestaurantName = YES;
+    }
+    if([elementName isEqualToString:@"availablebegintime"])
+    {
+        self.parsingDate = YES;
+    }
+    if([elementName isEqualToString:@"aName"])
+    {
+        self.parsingUser1 = YES;
+    }
+    if([elementName isEqualToString:@"bName"])
+    {
+        self.parsingUser2 = YES;
+    }
+    if([elementName isEqualToString:@"cName"])
+    {
+        self.parsingUser3 = YES;
+    }
+    if([elementName isEqualToString:@"dName"])
+    {
+        self.parsingUser4 = YES;
     }
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    //NSLog(@"Did end element");
-    // reached the end of the XML file
-    if([elementName isEqualToString:@"Users"]) return;
-    if([elementName isEqualToString:@"name"])
-    {
-        // let app know that it is between name tags
-        self.parsingUserName = NO;
-        // this checks to see if user is in the xml table
-        if([self.userFromParse isEqualToString:userName])
+    if([elementName isEqualToString:@"LunchTable"])
         {
-            self.foundUser = YES;
+            [userPastLunchObjects addObject:self.userPastLunch];
+            self.userPastLunch = nil;
         }
-        else {
-            self.userFromParse = nil;
-        }
+    if([elementName isEqualToString:@"restaurant_name"])
+    {
+        self.parsingRestaurantName = NO;
+    }
+    if([elementName isEqualToString:@"availablebegintime"])
+    {
+        self.parsingDate = NO;
+    }
+    if([elementName isEqualToString:@"aName"])
+    {
+        self.parsingUser1 = NO;
+    }
+    if([elementName isEqualToString:@"bName"])
+    {
+        self.parsingUser2 = NO;
+    }
+    if([elementName isEqualToString:@"cName"])
+    {
+        self.parsingUser3 = NO;
+    }
+    if([elementName isEqualToString:@"dName"])
+    {
+        self.parsingUser4 = NO;
     }
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    if(self.parsingUserName)
+    if(self.parsingDate)
     {
-        // add the found characters to the parsed UserName
-        // this only occurs for string between xml name tags
-        [self.userFromParse appendString:string];
+        [self.userPastLunch setDate:(NSString *)string];
+    }
+    if(self.parsingRestaurantName)
+    {
+        [self.userPastLunch setRestaurantName:(NSString *)string];
+    }
+    if(self.parsingUser1)
+    {
+        [self.userPastLunch setUser1Name:(NSString *)string];
+    }
+    if(self.parsingUser2)
+    {
+        [self.userPastLunch setUser2Name:(NSString *)string];
+    }
+    if(self.parsingUser3)
+    {
+        [self.userPastLunch setUser3Name:(NSString *)string];
+    }
+    if(self.parsingUser4)
+    {
+        [self.userPastLunch setUser4Name:(NSString *)string];
     }
 }
 

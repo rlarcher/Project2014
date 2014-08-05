@@ -23,6 +23,9 @@ NSMutableArray *restaurantLocations;
 NSMutableArray *restaurantPictures;
 NSMutableArray *beginTimes;
 NSMutableArray *upcomingLunchObjects;
+NSMutableArray *restaurantObjects;
+NSMutableArray *userPastLunchObjects;
+NSMutableArray *userUpcomingLunchObjects;
 NSString *serverAddress;
 
 

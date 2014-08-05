@@ -23,6 +23,8 @@
 
 - (NSString *) age;
 
+- (NSString *) firstName;
+
 // set methods
 -(void)setName:(NSString *)input;
 

@@ -11,7 +11,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "User.h"
 
-@interface FirstViewController : UIViewController <NSXMLParserDelegate>
+@interface FirstViewController : UIViewController <FBLoginViewDelegate>
 - (IBAction)showEmail:(id)sender;
 @property (strong,nonatomic) UILabel *nameLabel;
 @property (strong, nonatomic) UIButton *contact;

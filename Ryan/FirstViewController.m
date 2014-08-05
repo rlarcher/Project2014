@@ -103,13 +103,12 @@
         //[self.view addSubview:self.contact];
         
         // add target for contact button
-        [self.contact addTarget:self action:@selector(showEmail:) forControlEvents:UIControlEventTouchUpInside];
+        //[self.contact addTarget:self action:@selector(showEmail:) forControlEvents:UIControlEventTouchUpInside];
         
-        NSLog(userEmail);
     }
     return self;
 }
-
+/*
 - (IBAction)showEmail:(id)sender {
     // Email Subject
     NSString *emailTitle = @"SitWith IOS Feedback";
@@ -149,7 +148,7 @@
     // Close the Mail Interface
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
-
+*/
 // Handle possible errors that can occur during login
 - (void)loginView:(FBLoginView *)loginView handleError:(NSError *)error {
     NSString *alertMessage, *alertTitle;
@@ -233,8 +232,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.0 green:0.69 blue:0.28 alpha:0.2]];
-    
+    /*
     NSString *server = @"http://www.logarun.com/xml.ashx?username=ryan.archer&type=view";
     
     NSURL *url = [NSURL URLWithString:server];
@@ -246,6 +244,7 @@
     {
         NSLog(@"%@",[parser parserError].localizedDescription);
     }
+*/
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
@@ -308,7 +307,6 @@
     {
         [userEmail appendString:string];
         [self.currentUser setEmail:string];
-        NSLog(string);
     }
 }
 
@@ -319,7 +317,7 @@
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser
 {
-    NSLog(@"Started the document");
+    //NSLog(@"Started the document");
 }
 
 -(void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError {

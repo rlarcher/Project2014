@@ -36,8 +36,7 @@
         beginTimes = [[NSMutableArray alloc]init];
         upcomingLunchObjects = [[NSMutableArray alloc]init];
         
-        NSString *server = @"http://54.191.127.201:8080/SitWithWebServer/getNotFilledUpcomingLunchTable?email=rarcher17@gmail.com";
-        
+        NSString *server = [NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getNotFilledUpcomingLunchTable?email=%@",userEmail];
         NSURL *url = [NSURL URLWithString:server];
         NSData *xmlData = [NSData dataWithContentsOfURL:url];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];

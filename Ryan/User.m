@@ -30,6 +30,23 @@
     return age;
 }
 
+- (NSString *) firstName
+{
+    NSString *entireName = [self name];
+    NSMutableString *firstName = (NSMutableString *)@"";
+    int nameLength = entireName.length;
+    for (int i = 0; i < nameLength; i+= 1) {
+        if ([[entireName substringWithRange:NSMakeRange(i,1)] isEqualToString:@" "]) {
+            return firstName;
+        }
+        else
+        {
+            [firstName appendString:[entireName substringWithRange:NSMakeRange(i, 1)]];
+        }
+    }
+    return firstName;
+}
+
 // set methods
 -(void)setName:(NSString *)input
 {

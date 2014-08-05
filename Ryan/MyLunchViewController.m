@@ -7,6 +7,10 @@
 //
 
 #import "MyLunchViewController.h"
+#import "AppDelegate.h"
+#import "FirstViewController.h"
+#import "PastLunch.h"
+#import "UserUpcomingLunch.h"
 
 @interface MyLunchViewController ()
 
@@ -19,14 +23,92 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]pathForResource:@"lunchtable_list" ofType:@"xml"]];
+        self.parsingDate = NO;
+        self.parsingEmail = NO;
+        self.parsingRestaurant = NO;
+        self.parsingUserName = NO;
+        self.upcomingLunchIndex = 0;
+        userUpcomingLunchObjects = [[NSMutableArray alloc]init];
+        
+        NSString *sampleEmail = @"lippmanj@hotmail.com";
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getUpcomingRequestTobeProcessedByEmail?email=%@",sampleEmail]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
         BOOL result = [parser parse];
         if(!result) NSLog(@"Oh no that parse thing didn't go so well");
-        
     }
     return self;
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
+{
+    NSLog(elementName);
+    if([elementName isEqualToString:@"RequestTobeProcessed"])
+    {
+        self.currentUpcomingLunch = [[UserUpcomingLunch alloc]init];
+    }
+    if([elementName isEqualToString:@"lunchtabletime"])
+    {
+        self.parsingDate = YES;
+    }
+    if([elementName isEqualToString:@"email"])
+    {
+        self.parsingEmail = YES;
+    }
+    if([elementName isEqualToString:@"user name"])
+    {
+        self.parsingUserName = YES;
+    }
+    if([elementName isEqualToString:@"restaurant_name"])
+    {
+        self.parsingRestaurant = YES;
+    }
+    
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
+{
+    if([elementName isEqualToString:@"RequestTobeProcessed"])
+    {
+        [userUpcomingLunchObjects addObject:self.currentUpcomingLunch];
+        self.currentUpcomingLunch = nil;
+    }
+    if([elementName isEqualToString:@"lunchtabletime"])
+    {
+        self.parsingDate = NO;
+    }
+    if([elementName isEqualToString:@"email"])
+    {
+        self.parsingEmail = NO;
+    }
+    if([elementName isEqualToString:@"user name"])
+    {
+        self.parsingUserName = NO;
+    }
+    if([elementName isEqualToString:@"restaurant_name"])
+    {
+        self.parsingRestaurant = NO;
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    if(self.parsingDate)
+    {
+        [self.currentUpcomingLunch setDate:(NSString *)string];
+    }
+    if(self.parsingEmail)
+    {
+        [self.currentUpcomingLunch setEmail:(NSString *)string];
+    }
+    if(self.parsingRestaurant)
+    {
+        [self.currentUpcomingLunch setRestaurant:(NSString *)string];
+    }
+    if(self.parsingUserName)
+    {
+        [self.currentUpcomingLunch setUserName:(NSString *)string];
+    }
 }
 
 - (void)viewDidLoad
@@ -37,9 +119,19 @@
     self.title = @"Current Lunches";
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 100, 100)];
-    // just leave with no lunches for now
-    self.lunch.text = @"Harris Grill 8/15/2014 1:25 PM";
+    // get first upcoming lunch object
+    if([userUpcomingLunchObjects count] > 0)
+    {
+        UserUpcomingLunch *firstUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
+        self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 100, 100)];
+        // just leave with no lunches for now
+        self.lunch.text = [NSString stringWithFormat:@"%@ %@",[firstUpcomingLunch restaurant],[firstUpcomingLunch date]];
+    }
+    else
+    {
+        self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 100, 100)];
+        self.lunch.text = @"You do not have any lunches now";
+    }
     [self.lunch setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.lunch];
     
@@ -49,6 +141,15 @@
     [self.cancel addTarget:self action:@selector(confirmRemoveLunch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.cancel];
     
+    // button to see next upcoming lunch
+    self.next = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.next.frame = CGRectMake(40, 150, 250, 40);
+    [self.next setTitle:@"Next Upcoming Lunch" forState:UIControlStateNormal];
+    [self.view addSubview:self.next];
+    
+    // target for next button
+    [self.next addTarget:self action:@selector(nextLunch:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.confirmView = [[UIViewController alloc]init];
     self.confirmView.view.frame = self.view.frame;
     
@@ -56,7 +157,18 @@
     self.confirm.transform = CGAffineTransformMakeTranslation(25, 25);
 }
 
--(void)confirmRemoveLunch:(UIButton *)sender {
+- (void)nextLunch:(UIButton *)sender {
+    if([userUpcomingLunchObjects count] != 0)
+    {
+        self.upcomingLunchIndex += 1;
+        if(self.upcomingLunchIndex >= [userUpcomingLunchObjects count]) self.upcomingLunchIndex = 0;
+        UserUpcomingLunch *nextUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
+        self.lunch.text = [NSString stringWithFormat:@"%@ %@",[nextUpcomingLunch restaurant],[nextUpcomingLunch date]];
+
+    }
+}
+
+- (void)confirmRemoveLunch:(UIButton *)sender {
     [self.confirm show];
 }
 
