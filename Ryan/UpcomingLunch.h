@@ -17,6 +17,9 @@
     NSString *date;
     NSString *time;
     NSString *count;
+    NSString *lunchtable_id;
+    NSString *restaurant_id;
+    NSString *lunchtabletime;
 }
 
 // get methods
@@ -34,6 +37,12 @@
 
 - (NSString *)count;
 
+- (NSString *)lunchtable_id;
+
+- (NSString *)restaurant_id;
+
+- (NSString *)lunchtabletime;
+
 // set methods
 -(void)setRestaurantName:(NSString *)input;
 
@@ -47,6 +56,11 @@
 
 -(void)setTime:(NSString *)input;
 
--(void)setCount:(NSString *)count;
+-(void)setCount:(NSString *)input;
 
+-(void)setLunchtable_id:(NSString *)input;
+
+-(void)setRestaurant_id:(NSString *)input;
+
+-(void)setLunchtabletime:(NSString *)input;
 @end

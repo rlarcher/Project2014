@@ -21,6 +21,9 @@
 @property BOOL foundUser;
 @property BOOL parsingEmail;
 @property UIButton *settingsButton;
+@property UIButton *myLunches;
+@property UIButton *pastLunches;
+@property UIButton *viewLunches;
 @property User *currentUser;
 @end
 

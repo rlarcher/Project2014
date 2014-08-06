@@ -205,6 +205,19 @@
 
 - (void)confirmRemoveLunch:(UIButton *)sender {
     [self.confirm show];
+    //SitWithWebServer/deleteRequesttobeprocessed?requesttobeprocessed_id= &lunchtable_id= &email=
+    UserUpcomingLunch *currentUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
+    NSString *requesttobeprocessed_id = [currentUpcomingLunch requestobeprocessed_id];
+    NSString *lunchtable_id = [currentUpcomingLunch lunchtable_id];
+    NSString *email = [currentUpcomingLunch email];
+    
+    /*
+    NSString *baseUrl = @"The base url goes here";
+    NSString *fullUrl = @"Add the lunch info from above to this string";
+    NSURL *url = [NSURL URLWithString:fullUrl];
+    NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+    [parser parse];
+    */
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

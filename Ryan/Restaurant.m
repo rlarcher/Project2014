@@ -9,6 +9,7 @@
 #import "Restaurant.h"
 
 @implementation Restaurant
+
 // get methods
 - (NSString *) name
 {
@@ -29,6 +30,12 @@
 {
     return picture;
 }
+
+- (NSString *)restaurant_id
+{
+    return restaurant_id;
+}
+
 // set methods
 -(void)setName:(NSString *)input
 {
@@ -46,4 +53,10 @@
 {
     picture = input;
 }
+
+-(void)setRestaurant_id:(NSString *)input
+{
+    restaurant_id = input;
+}
+
 @end

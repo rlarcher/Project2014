@@ -41,6 +41,11 @@
     return restaurant_id;
 }
 
+- (NSString *)requesttobeprocessed_id
+{
+    return requesttobeprocessed_id;
+}
+
 // set methods
 - (void)setUserName:(NSString *)input
 {
@@ -70,4 +75,10 @@
 {
     restaurant_id = input;
 }
+
+- (void)setRequesttobeprocessed_id:(NSString *)input
+{
+    requesttobeprocessed_id = input;
+}
+
 @end

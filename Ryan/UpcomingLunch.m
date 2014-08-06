@@ -45,6 +45,22 @@
 {
     return count;
 }
+
+- (NSString *)lunchtable_id
+{
+    return lunchtable_id;
+}
+
+- (NSString *)restaurant_id
+{
+    return restaurant_id;
+}
+
+- (NSString *)lunchtabletime
+{
+    return lunchtabletime;
+}
+
 // set methods
 -(void)setRestaurantName:(NSString *)input
 {
@@ -75,6 +91,21 @@
 -(void)setCount:(NSString *)input
 {
     count = input;
+}
+
+-(void)setLunchtable_id:(NSString *)input
+{
+    lunchtable_id = input;
+}
+
+-(void)setRestaurant_id:(NSString *)input
+{
+    restaurant_id = input;
+}
+
+-(void)setLunchtabletime:(NSString *)input
+{
+    lunchtabletime = input;
 }
 
 @end

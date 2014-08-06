@@ -57,6 +57,7 @@
 		7781710519911F6B0027506D /* MyMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710419911F6B0027506D /* MyMailViewController.m */; };
 		77817108199128340027506D /* UserUpcomingLunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77817107199128340027506D /* UserUpcomingLunch.m */; };
 		7781710B19916FE70027506D /* ConfirmAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710A19916FE70027506D /* ConfirmAlertViewController.m */; };
+		7781710E1992A2750027506D /* ParseForUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710D1992A2750027506D /* ParseForUser.m */; };
 		778799F219894A6A002AA39A /* emptyTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 778799F119894A6A002AA39A /* emptyTable.png */; };
 		778799F5198972B4002AA39A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778799F4198972B4002AA39A /* SettingsViewController.m */; };
 		77879A68198BD611002AA39A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A67198BD611002AA39A /* User.m */; };
@@ -132,6 +133,8 @@
 		77817107199128340027506D /* UserUpcomingLunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserUpcomingLunch.m; sourceTree = "<group>"; };
 		7781710919916FE70027506D /* ConfirmAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmAlertViewController.h; sourceTree = "<group>"; };
 		7781710A19916FE70027506D /* ConfirmAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmAlertViewController.m; sourceTree = "<group>"; };
+		7781710C1992A2750027506D /* ParseForUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseForUser.h; sourceTree = "<group>"; };
+		7781710D1992A2750027506D /* ParseForUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseForUser.m; sourceTree = "<group>"; };
 		778799F119894A6A002AA39A /* emptyTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emptyTable.png; path = "../../SitWith Pics/emptyTable.png"; sourceTree = "<group>"; };
 		778799F3198972B4002AA39A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		778799F4198972B4002AA39A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 				77879A6D198FE83D002AA39A /* UpcomingLunch.m */,
 				77170D221975A8C400C288EE /* FirstViewController.h */,
 				77170D231975A8C400C288EE /* FirstViewController.m */,
+				7781710C1992A2750027506D /* ParseForUser.h */,
+				7781710D1992A2750027506D /* ParseForUser.m */,
 				7781710319911F6B0027506D /* MyMailViewController.h */,
 				7781710419911F6B0027506D /* MyMailViewController.m */,
 				77879A69198BDF7D002AA39A /* Restaurant.h */,
@@ -430,6 +435,7 @@
 				77170CF4197591FD00C288EE /* main.m in Sources */,
 				77170D401981665F00C288EE /* PastLunchesViewController.m in Sources */,
 				7781710B19916FE70027506D /* ConfirmAlertViewController.m in Sources */,
+				7781710E1992A2750027506D /* ParseForUser.m in Sources */,
 				77817108199128340027506D /* UserUpcomingLunch.m in Sources */,
 				778799F5198972B4002AA39A /* SettingsViewController.m in Sources */,
 				77170D241975A8C400C288EE /* FirstViewController.m in Sources */,

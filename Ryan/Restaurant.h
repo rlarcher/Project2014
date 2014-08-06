@@ -14,6 +14,7 @@
     NSString *address;
     NSString *hours;
     NSString *picture;
+    NSString *restaurant_id;
 }
 
 // get methods
@@ -25,6 +26,8 @@
 
 - (NSString *) picture;
 
+- (NSString *) restaurant_id;
+
 // set methods
 -(void)setName:(NSString *)input;
 
@@ -33,5 +36,7 @@
 -(void)setHours:(NSString *)input;
 
 -(void)setPicture:(NSString *)input;
+
+-(void)setRestaurant_id:(NSString *)input;
 
 @end

@@ -36,10 +36,27 @@
     {
         // user clicked no
         [self.navigationController popViewControllerAnimated:YES];
+        // do nothing because user said NO!
     }
     if(buttonIndex == 1)
     {
         // user clicked yes
+        
+        // get the strings from the UpcomingLunch object to use in the url
+        NSString *lunchtable_id = [signUpLunch lunchtable_id];
+        NSString *restaurant_id = [signUpLunch restaurant_id];
+        NSString *restaurant_name = [signUpLunch restaurantName];
+        NSString *user_name = userName;
+        NSString *lunchtabletime = [signUpLunch lunchtabletime];
+        // add the user to the lunch
+        // here is the base url SitWithWebServer/addRequestTobeProcessed?lunchtable_id=& restaurant_id=& restaurant_name= &email= &user_name= &lunchtabletime=
+        /*
+        NSString *serverurl = @"urlgoeshere";
+        NSURL *url = [NSURL URLWithString:serverurl];
+        NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+        [parser parse];
+        */
+        // go back to previous view
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

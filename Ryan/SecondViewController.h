@@ -36,6 +36,9 @@
 @property BOOL parsingPicture;
 @property BOOL parsingTime;
 @property BOOL parsingAvailability;
+@property BOOL parsingLunchtable_id;
+@property BOOL parsingRestaurant_id;
+@property BOOL parsingLunchtabletime;
 
 @property int restaurantIndex;
 @end

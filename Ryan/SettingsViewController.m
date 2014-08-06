@@ -27,7 +27,7 @@
         CGFloat screenWidth = screenRect.size.width;
         //CGFloat screenHeight = screenRect.size.height;
         self.visit.frame = CGRectMake(screenWidth/2-80, 90, 120, 50);
-        [self.visit setTitle:@"Visit SitWith" forState:UIControlStateNormal];
+        [self.visit setTitle:@"Visit sitWith.co" forState:UIControlStateNormal];
         [self.visit addTarget:self action:@selector(visitSite:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.visit];
         
@@ -40,8 +40,6 @@
     }
     return self;
 }
-
-
 
 -(void)showfq:(UIButton *)sender
 {

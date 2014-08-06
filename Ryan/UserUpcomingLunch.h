@@ -16,6 +16,7 @@
     NSString *date;
     NSString *lunchtable_id;
     NSString *restaurant_id;
+    NSString *requesttobeprocessed_id;
 }
 
 // get methods
@@ -31,6 +32,8 @@
 
 - (NSString *)restaurant_id;
 
+- (NSString *)requestobeprocessed_id;
+
 // set methods
 - (void)setUserName:(NSString *)input;
 
@@ -43,5 +46,7 @@
 - (void)setLunctable_id:(NSString *)input;
 
 - (void)setRestaurant_id:(NSString *)input;
+
+- (void)setRequesttobeprocessed_id:(NSString *)input;
 
 @end

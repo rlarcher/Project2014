@@ -55,6 +55,17 @@
 }
 
 - (void)confirmed:(UIButton *)sender {
+    // user pressed confirm so make lunch with server
+    // base url SitWithWebServer/createLunchTableWithJoin?availablebegintime= &restaurant_id= &restaurant_name= &email= &user_name=
+    
+    // strings to use in url to make lunch
+    NSDateFormatter *df = [[NSDateFormatter alloc]init];
+    NSString *availablebegintime = [df stringFromDate:chosenDate];
+    NSString *restaurant_id = [selectedMakeRestaurant restaurant_id];
+    NSString *restaurant_name = [selectedMakeRestaurant name];
+    NSString *email = userEmail;
+    NSString *user_name = userName;
+    
     [self.alertConfirm show];
     SecondViewController *secondViewController = [[SecondViewController alloc] init];
     [self.navigationController pushViewController:secondViewController animated:YES];

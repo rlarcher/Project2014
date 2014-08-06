@@ -15,6 +15,7 @@
 #import "PastLunchesViewController.h"
 #import "SettingsViewController.h"
 #import "User.h"
+#import "ParseForUser.h"
 
 @interface FirstViewController ()
 
@@ -57,31 +58,37 @@
         [self.view addSubview:logo];
         
         // button to view available lunches
-        UIButton *viewLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        viewLunches.frame = CGRectMake(60, 410, 200, 44);
-        [viewLunches setTitle:@"View Available Lunches" forState:UIControlStateNormal];
-        [self.view addSubview:viewLunches];
+        self.viewLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.viewLunches.frame = CGRectMake(60, 410, 200, 44);
+        [self.viewLunches setTitle:@"View Available Lunches" forState:UIControlStateNormal];
+        [self.viewLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
+        [self.viewLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+        //[self.view addSubview:self.viewLunches];
         
         // make button a link to the new viewcontroller
-        [viewLunches addTarget:self action:@selector(showLunches:) forControlEvents:UIControlEventTouchUpInside];
+        [self.viewLunches addTarget:self action:@selector(showLunches:) forControlEvents:UIControlEventTouchUpInside];
         
         // button to view user's lunches
-        UIButton *myLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        myLunches.frame = CGRectMake(60, 445, 200, 44);
-        [myLunches setTitle:@"My Current Lunches" forState:UIControlStateNormal];
-        [self.view addSubview:myLunches];
+        self.myLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.myLunches.frame = CGRectMake(60, 445, 200, 44);
+        [self.myLunches setTitle:@"My Current Lunches" forState:UIControlStateNormal];
+        [self.myLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
+        [self.myLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+        //[self.view addSubview:self.myLunches];
         
         // make button link to new viewcontroller
-        [myLunches addTarget:self action:@selector(viewMyLunches:) forControlEvents:UIControlEventTouchUpInside];
+        [self.myLunches addTarget:self action:@selector(viewMyLunches:) forControlEvents:UIControlEventTouchUpInside];
         
         // button for past lunches
-        UIButton *pastLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        pastLunches.frame = CGRectMake(60, 375, 200, 44);
-        [pastLunches setTitle:@"Past Lunches" forState:UIControlStateNormal];
-        [self.view addSubview:pastLunches];
+        self.pastLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.pastLunches.frame = CGRectMake(60, 375, 200, 44);
+        [self.pastLunches setTitle:@"Past Lunches" forState:UIControlStateNormal];
+        [self.pastLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
+        [self.pastLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+        //[self.view addSubview:self.pastLunches];
         
         // make button link to past lunch view
-        [pastLunches addTarget:self action:@selector(showPastLunches:) forControlEvents:UIControlEventTouchUpInside];
+        [self.pastLunches addTarget:self action:@selector(showPastLunches:) forControlEvents:UIControlEventTouchUpInside];
         
         // create the login
         FBLoginView *loginView = [[FBLoginView alloc] initWithReadPermissions:@[@"public_profile",
@@ -198,6 +205,23 @@
     userName = (NSMutableString *)user.name;
     self.nameLabel.text = [NSString stringWithFormat:@"Welcome %@",user.first_name];
     userEmail = [user objectForKey:@"email"];
+    ParseForUser *parserForUser = [[ParseForUser alloc]init];
+    self.foundUser = [parserForUser searchForUser];
+    if(!self.foundUser)
+    {
+        // add user to database
+        /*
+        NSString *baseURL = @"http://54.191.127.201:8080/SitWithWebServer/createNewUser?user_id= &name= &gender= &age= &email= &usertype=";
+        NSString *name = userName;
+        NSString *email = userEmail;
+        NSURL *url = [NSURL URLWithString:baseURL];
+        NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+        [parser parse];
+        */
+    }
+    [self.view addSubview:self.pastLunches];
+    [self.view addSubview:self.viewLunches];
+    [self.view addSubview:self.myLunches];
 }
 
 -(void) showSettings:(UIButton *)sender
@@ -231,99 +255,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    /*
-    NSString *server = @"http://www.logarun.com/xml.ashx?username=ryan.archer&type=view";
     
-    NSURL *url = [NSURL URLWithString:server];
-    NSData *xmlData = [NSData dataWithContentsOfURL:url];
-    NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];
-    [parser setDelegate:self];
-    BOOL result = [parser parse];
-    if(result == NO)
-    {
-        NSLog(@"%@",[parser parserError].localizedDescription);
-    }
-*/
+    // Do any additional setup after loading the view.
 }
-
--(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
-{
-    //NSLog(@"Did start element");
-    if([elementName isEqualToString:@"user"])
-    {
-        self.parsingUserData = YES;
-        self.currentUser = [[User alloc]init];
-        return;
-    }
-    if([elementName isEqualToString:@"name"])
-    {
-        self.parsingUserName = YES;
-    }
-    if([elementName isEqualToString:@"email"])
-    {
-        self.parsingEmail = YES;
-    }
-}
-
--(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    //NSLog(@"Did end element");
-    // reached the end of the XML file
-    if([elementName isEqualToString:@"Users"])
-    {
-        if(self.foundUser == NO)
-        {
-            // did not find user so add to database
-        }
-    }
-    if([elementName isEqualToString:@"name"])
-    {
-        // let app know that it is between name tags
-        self.parsingUserName = NO;
-        // this checks to see if user is in the xml table
-        if([[self.currentUser name] isEqualToString:userName])
-        {
-            // user is in database
-            self.foundUser = YES;
-        }
-        else {
-            self.userFromParse = nil;
-            self.currentUser = nil;
-        }
-    }
-    if([elementName isEqualToString:@"email"]) self.parsingEmail = NO;
-}
-
--(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
-{
-    if(self.parsingUserName)
-    {
-        // add the found characters to the parsed UserName
-        // this only occurs for string between xml name tags
-        [self.userFromParse appendString:string];
-        [self.currentUser setName:string];
-    }
-    if(self.parsingEmail)
-    {
-        [userEmail appendString:string];
-        [self.currentUser setEmail:string];
-    }
-}
-
-// error handling
--(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-    NSLog(@"XMLParser error: %@", [parseError localizedDescription]);
-}
-
--(void)parserDidStartDocument:(NSXMLParser *)parser
-{
-    //NSLog(@"Started the document");
-}
-
--(void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError {
-    NSLog(@"XMLParser error: %@", [validationError localizedDescription]);
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

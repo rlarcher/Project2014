@@ -25,6 +25,8 @@
         self.title = @"Create a Lunch";
         self.view.backgroundColor = [UIColor whiteColor];
         
+        // init globals
+        selectedMakeRestaurant = [[Restaurant alloc]init];
         restaurantObjects = [[NSMutableArray alloc]init];
         
         // set parsing booleans false
@@ -32,6 +34,7 @@
         self.parsingHours = NO;
         self.parsingName = NO;
         self.parsingPicture = NO;
+        self.parsingRestaurant_id = NO;
         
         NSString *server = @"http://54.191.127.201:8080/SitWithWebServer/getRestaurants";
         NSURL *url = [NSURL URLWithString:server];
@@ -42,10 +45,13 @@
         if(!result) NSLog(@"Oh no that parse thing didn't go so well");
         
         // tell them to choose a location
-        self.choose = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 350, 50)];
-        self.choose.text = @"Choose a location and time for your lunch";
+        self.choose = [[UILabel alloc] initWithFrame:CGRectMake(60, 65, 350, 30)];
+        self.choose.text = @"Choose a location and time";
         [self.view addSubview:self.choose];
         
+        self.instructions = [[UITextView alloc]initWithFrame:CGRectMake(10, 90, 400, 40)];
+        self.instructions.text = @"Swipe left for next restaurant and right to make lunch";
+        [self.view addSubview:self.instructions];
         
     }
     return self;
@@ -74,6 +80,10 @@
     {
         self.parsingPicture = YES;
     }
+    if([elementName isEqualToString:@"restaurant_id"])
+    {
+        self.parsingRestaurant_id = YES;
+    }
 }
 
 // parser reached the end of an element
@@ -100,6 +110,10 @@
     {
         self.parsingPicture = NO;
     }
+    if([elementName isEqualToString:@"restaurant_id"])
+    {
+        self.parsingRestaurant_id = NO;
+    }
 }
 
 // this handles the characters between the XML tags
@@ -120,6 +134,10 @@
     if(self.parsingPicture)
     {
         [self.currentRestaurant setPicture:string];
+    }
+    if(self.parsingRestaurant_id)
+    {
+        [self.currentRestaurant setRestaurant_id:string];
     }
 }
 
@@ -205,7 +223,10 @@
     dayComponent.day = 14;
     NSCalendar *theCalendar = [NSCalendar currentCalendar];
     NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:newDate options:0];
+    dayComponent.day = 60;
+    NSDate *maxNextDate = [theCalendar dateByAddingComponents:dayComponent toDate:newDate options:0];
     self.dateAndTime.minimumDate = nextDate;
+    self.dateAndTime.maximumDate = maxNextDate;
     
     chosenDate = nextDate;
     [self.view addSubview:self.dateAndTime];
@@ -286,7 +307,9 @@
 
 - (void)makeLunch:(UIButton *)sender
 {
-    chosenRestaurant = restaurantNames[self.restaurantIndex];
+    selectedMakeRestaurant = restaurantObjects[self.restaurantIndex];
+    Restaurant *restaurant = restaurantObjects[self.restaurantIndex];
+    chosenRestaurant = [restaurant name];
     RegisterViewController *registerViewController = [[RegisterViewController alloc]init];
     [self.navigationController pushViewController:registerViewController animated:YES];
 }

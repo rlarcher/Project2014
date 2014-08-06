@@ -22,11 +22,13 @@
 @property (strong,nonatomic) UITextView *address;
 @property (strong,nonatomic) UIButton *nextRestaurant;
 @property (strong,nonatomic) UIButton *chooseRestaurant;
+@property (strong,nonatomic) UITextView *instructions;
 @property Restaurant *currentRestaurant;
 @property BOOL parsingName;
 @property BOOL parsingAddress;
 @property BOOL parsingPicture;
 @property BOOL parsingHours;
+@property BOOL parsingRestaurant_id;
 @property int restaurantIndex;
 @end
 
