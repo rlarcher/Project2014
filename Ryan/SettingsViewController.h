@@ -12,4 +12,5 @@
 @property (strong,nonatomic) UIButton *visit;
 @property (strong,nonatomic) UIButton *fqButton;
 @property (strong,nonatomic) UITextView *descriptionHeader;
+@property (strong,nonatomic) UIButton *delete;
 @end

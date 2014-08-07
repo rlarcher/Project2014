@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77170CE3197591FD00C288EE"
                BuildableName = "Ryan.app"
-               BlueprintName = "Ryan"
-               ReferencedContainer = "container:Ryan.xcodeproj">
+               BlueprintName = "SitWith"
+               ReferencedContainer = "container:SitWith.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "77170D04197591FE00C288EE"
                BuildableName = "RyanTests.xctest"
-               BlueprintName = "RyanTests"
-               ReferencedContainer = "container:Ryan.xcodeproj">
+               BlueprintName = "SitWithTests"
+               ReferencedContainer = "container:SitWith.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77170CE3197591FD00C288EE"
             BuildableName = "Ryan.app"
-            BlueprintName = "Ryan"
-            ReferencedContainer = "container:Ryan.xcodeproj">
+            BlueprintName = "SitWith"
+            ReferencedContainer = "container:SitWith.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77170CE3197591FD00C288EE"
             BuildableName = "Ryan.app"
-            BlueprintName = "Ryan"
-            ReferencedContainer = "container:Ryan.xcodeproj">
+            BlueprintName = "SitWith"
+            ReferencedContainer = "container:SitWith.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "77170CE3197591FD00C288EE"
             BuildableName = "Ryan.app"
-            BlueprintName = "Ryan"
-            ReferencedContainer = "container:Ryan.xcodeproj">
+            BlueprintName = "SitWith"
+            ReferencedContainer = "container:SitWith.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

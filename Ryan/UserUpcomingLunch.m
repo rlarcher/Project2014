@@ -5,6 +5,7 @@
 //  Created by William Lutz on 8/5/14.
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
+// Class for upcoming SitWith lunches
 
 #import "UserUpcomingLunch.h"
 

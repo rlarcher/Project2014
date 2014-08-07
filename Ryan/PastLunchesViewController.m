@@ -61,7 +61,13 @@
     
     // create the text view for the guests and add it to the view
     self.myText = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 200, 150)];
-    self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with %@, %@, %@, and %@",[firstPastLunch restaurantName],[firstPastLunch user1FirstName],[firstPastLunch user2FirstName],[firstPastLunch user3FirstName],[firstPastLunch user4FirstName]];
+    if([userPastLunchObjects count] > 0)
+    {
+        self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with %@, %@, %@, and %@",[firstPastLunch restaurantName],[firstPastLunch user1FirstName],[firstPastLunch user2FirstName],[firstPastLunch user3FirstName],[firstPastLunch user4FirstName]];
+    }
+    else{
+        self.myText.text = @"You do not have any past lunches";
+    }
     self.myText.editable = NO;
     [self.view addSubview:self.myText];
     

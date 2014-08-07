@@ -5,6 +5,8 @@
 //  Created by William Lutz on 7/23/14.
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
+// View Controller for User looking through past lunches
+// that he/she attended
 
 #import "MyLunchViewController.h"
 #import "AppDelegate.h"
@@ -43,6 +45,7 @@
     return self;
 }
 
+// Parsing Methods
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
     //NSLog(@"%@",elementName);

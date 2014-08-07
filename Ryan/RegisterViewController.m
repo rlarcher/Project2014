@@ -31,23 +31,27 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // allocate dateformatter in order to get string from nsdate
     NSDateFormatter *df = [[NSDateFormatter alloc]init];
     [df setDateStyle:NSDateFormatterShortStyle];
     [df setTimeStyle:NSDateFormatterShortStyle];
     
+    // chosenDate is global that holds date selected by user in previous viewcontroller
     NSString *myDate = [df stringFromDate:chosenDate];
     
     // add the label with the restaurant name
     self.restaurant = [[UILabel alloc] initWithFrame:CGRectMake(40, 100, 300, 150)];
     self.restaurant.numberOfLines = 0;
-    self.restaurant.text = [NSString stringWithFormat:@"Make a lunch at %@ \n on %@",chosenRestaurant,myDate];
+    self.restaurant.text = [NSString stringWithFormat:@"Make a lunch at %@ \n on %@?",chosenRestaurant,myDate];
     [self.view addSubview:self.restaurant];
     
+    // button to confirm created lunch
     UIButton *confirm = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     confirm.frame = CGRectMake(60, 200, 150, 100);
     [confirm setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.view addSubview:confirm];
     
+    // alert that is shown after user presses confirm
     self.alertConfirm = [[UIAlertView alloc] initWithTitle:nil message:@"Thank you for using SitWith" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     
     [confirm addTarget:self action:@selector(confirmed:) forControlEvents:UIControlEventTouchUpInside];
@@ -66,10 +70,22 @@
     NSString *email = userEmail;
     NSString *user_name = userName;
     
+    // get rid of space in user name
+    NSMutableString *newString = [[NSMutableString alloc]init];
+    for (int i = 0; i < [user_name length]; i++) {
+        if(![[user_name substringWithRange:NSMakeRange(i, 1)] isEqualToString:@" "])
+        {
+            newString = (NSMutableString *)[NSString stringWithFormat:@"%@%@",newString,[user_name substringWithRange:NSMakeRange(i, 1)]];
+        }
+    }
+    user_name = (NSString *)newString;
+    
     NSString *url = [NSString stringWithFormat:@"%@/createLunchTableWithJoin?availablebegintime=%@&restaurant_id=%@&email=%@&user_name=%@",serverAddress,availablebegintime,restaurant_id,email,user_name];
     NSURL *serverUrl = [NSURL URLWithString:url];
     //NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:serverUrl];
     //[parser parse];
+    
+    // show alert and change the view
     [self.alertConfirm show];
     SecondViewController *secondViewController = [[SecondViewController alloc] init];
     [self.navigationController pushViewController:secondViewController animated:YES];

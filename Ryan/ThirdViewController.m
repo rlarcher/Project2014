@@ -5,6 +5,8 @@
 //  Created by William Lutz on 7/15/14.
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
+// This is the ViewController for the User looking through
+// available lunches
 
 #import "ThirdViewController.h"
 #import "AppDelegate.h"
@@ -36,6 +38,7 @@
         self.parsingPicture = NO;
         self.parsingRestaurant_id = NO;
         
+        // parse the xml from the server
         NSString *server = [NSString stringWithFormat:@"%@/getRestaurants",serverAddress];
         NSURL *url = [NSURL URLWithString:server];
         NSData *xmlData = [NSData dataWithContentsOfURL:url];
@@ -49,6 +52,7 @@
         self.choose.text = @"Choose a location and time";
         [self.view addSubview:self.choose];
         
+        // instructions for how to use the swipe feature
         self.instructions = [[UITextView alloc]initWithFrame:CGRectMake(10, 90, 400, 40)];
         self.instructions.text = @"Swipe left for next restaurant and right to make lunch";
         [self.view addSubview:self.instructions];

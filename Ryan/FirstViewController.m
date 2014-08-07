@@ -40,6 +40,7 @@
         // hide the back button because this is first screen
         [self.navigationItem setHidesBackButton:YES];
 
+        // settings button
         self.settingsButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.settingsButton.frame = CGRectMake(0, 0, 80, 30);
         [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
@@ -210,17 +211,28 @@
     if(!self.foundUser)
     {
         // add user to database
-        /*
+        
+        // format the user name for database by removing space in name
+        NSMutableString *newString = [[NSMutableString alloc]init];
         NSString *name = userName;
+        for (int i = 0; i < [name length]; i++) {
+            if(![[name substringWithRange:NSMakeRange(i, 1)] isEqualToString:@" "])
+            {
+                newString = (NSMutableString *)[NSString stringWithFormat:@"%@%@",newString,[name substringWithRange:NSMakeRange(i, 1)]];
+            }
+        }
+        /*
+        name = (NSString *)newString;
         NSString *email = userEmail;
         NSString *user_id = @"12345";
         NSString *gender = @"male";
         NSString *age = @"23";
-        NSString *usertype = @"";
+        NSString *usertype = @"user";
         NSString *baseURL = [NSString stringWithFormat:@"%@/createNewUser?user_id=%@&name=%@&gender=%@&age=%@&email=%@&usertype=%@",serverAddress,user_id,name,gender,age,email,usertype];
         NSURL *url = [NSURL URLWithString:baseURL];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
-        [parser parse];
+        BOOL result = [parser parse];
+        if(!result)NSLog(parser.parserError.localizedDescription);
         */
     }
     [self.view addSubview:self.pastLunches];

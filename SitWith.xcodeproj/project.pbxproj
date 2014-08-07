@@ -76,22 +76,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		77170CE4197591FD00C288EE /* Ryan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77170CE4197591FD00C288EE /* SitWith.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SitWith.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77170CE7197591FD00C288EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77170CE9197591FD00C288EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		77170CEB197591FD00C288EE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		77170CEF197591FD00C288EE /* Ryan-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ryan-Info.plist"; sourceTree = "<group>"; };
+		77170CEF197591FD00C288EE /* SitWith-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SitWith-Info.plist"; sourceTree = "<group>"; };
 		77170CF1197591FD00C288EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77170CF3197591FD00C288EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		77170CF5197591FD00C288EE /* Ryan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ryan-Prefix.pch"; sourceTree = "<group>"; };
+		77170CF5197591FD00C288EE /* SitWith-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SitWith-Prefix.pch"; sourceTree = "<group>"; };
 		77170CF6197591FD00C288EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		77170CF7197591FD00C288EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		77170CFA197591FD00C288EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77170CFD197591FE00C288EE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		77170CFF197591FE00C288EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		77170D05197591FE00C288EE /* RyanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RyanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		77170D05197591FE00C288EE /* SitWithTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SitWithTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77170D06197591FE00C288EE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		77170D0E197591FE00C288EE /* RyanTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RyanTests-Info.plist"; sourceTree = "<group>"; };
+		77170D0E197591FE00C288EE /* SitWithTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SitWithTests-Info.plist"; sourceTree = "<group>"; };
 		77170D10197591FE00C288EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77170D12197591FE00C288EE /* RyanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RyanTests.m; sourceTree = "<group>"; };
 		77170D1E1975A76500C288EE /* rsz_sitwith.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rsz_sitwith.png; sourceTree = "<group>"; };
@@ -175,8 +175,8 @@
 		77170CDB197591FD00C288EE = {
 			isa = PBXGroup;
 			children = (
-				77170CED197591FD00C288EE /* Ryan */,
-				77170D0C197591FE00C288EE /* RyanTests */,
+				77170CED197591FD00C288EE /* SitWith */,
+				77170D0C197591FE00C288EE /* SitWithTests */,
 				77170CE6197591FD00C288EE /* Frameworks */,
 				77170CE5197591FD00C288EE /* Products */,
 			);
@@ -185,8 +185,8 @@
 		77170CE5197591FD00C288EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				77170CE4197591FD00C288EE /* Ryan.app */,
-				77170D05197591FE00C288EE /* RyanTests.xctest */,
+				77170CE4197591FD00C288EE /* SitWith.app */,
+				77170D05197591FE00C288EE /* SitWithTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		77170CED197591FD00C288EE /* Ryan */ = {
+		77170CED197591FD00C288EE /* SitWith */ = {
 			isa = PBXGroup;
 			children = (
 				77170D5E19881E4000C288EE /* Resources */,
@@ -256,33 +256,35 @@
 				77170CFF197591FE00C288EE /* Images.xcassets */,
 				77170CEE197591FD00C288EE /* Supporting Files */,
 			);
+			name = SitWith;
 			path = Ryan;
 			sourceTree = "<group>";
 		};
 		77170CEE197591FD00C288EE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				77170CEF197591FD00C288EE /* Ryan-Info.plist */,
+				77170CEF197591FD00C288EE /* SitWith-Info.plist */,
 				77170CF0197591FD00C288EE /* InfoPlist.strings */,
 				77170CF3197591FD00C288EE /* main.m */,
-				77170CF5197591FD00C288EE /* Ryan-Prefix.pch */,
+				77170CF5197591FD00C288EE /* SitWith-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		77170D0C197591FE00C288EE /* RyanTests */ = {
+		77170D0C197591FE00C288EE /* SitWithTests */ = {
 			isa = PBXGroup;
 			children = (
 				77170D12197591FE00C288EE /* RyanTests.m */,
 				77170D0D197591FE00C288EE /* Supporting Files */,
 			);
+			name = SitWithTests;
 			path = RyanTests;
 			sourceTree = "<group>";
 		};
 		77170D0D197591FE00C288EE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				77170D0E197591FE00C288EE /* RyanTests-Info.plist */,
+				77170D0E197591FE00C288EE /* SitWithTests-Info.plist */,
 				77170D0F197591FE00C288EE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -306,9 +308,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		77170CE3197591FD00C288EE /* Ryan */ = {
+		77170CE3197591FD00C288EE /* SitWith */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 77170D16197591FE00C288EE /* Build configuration list for PBXNativeTarget "Ryan" */;
+			buildConfigurationList = 77170D16197591FE00C288EE /* Build configuration list for PBXNativeTarget "SitWith" */;
 			buildPhases = (
 				77170CE0197591FD00C288EE /* Sources */,
 				77170CE1197591FD00C288EE /* Frameworks */,
@@ -318,14 +320,14 @@
 			);
 			dependencies = (
 			);
-			name = Ryan;
+			name = SitWith;
 			productName = Ryan;
-			productReference = 77170CE4197591FD00C288EE /* Ryan.app */;
+			productReference = 77170CE4197591FD00C288EE /* SitWith.app */;
 			productType = "com.apple.product-type.application";
 		};
-		77170D04197591FE00C288EE /* RyanTests */ = {
+		77170D04197591FE00C288EE /* SitWithTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 77170D19197591FE00C288EE /* Build configuration list for PBXNativeTarget "RyanTests" */;
+			buildConfigurationList = 77170D19197591FE00C288EE /* Build configuration list for PBXNativeTarget "SitWithTests" */;
 			buildPhases = (
 				77170D01197591FE00C288EE /* Sources */,
 				77170D02197591FE00C288EE /* Frameworks */,
@@ -336,9 +338,9 @@
 			dependencies = (
 				77170D0B197591FE00C288EE /* PBXTargetDependency */,
 			);
-			name = RyanTests;
+			name = SitWithTests;
 			productName = RyanTests;
-			productReference = 77170D05197591FE00C288EE /* RyanTests.xctest */;
+			productReference = 77170D05197591FE00C288EE /* SitWithTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -355,7 +357,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 77170CDF197591FD00C288EE /* Build configuration list for PBXProject "Ryan" */;
+			buildConfigurationList = 77170CDF197591FD00C288EE /* Build configuration list for PBXProject "SitWith" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -368,8 +370,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				77170CE3197591FD00C288EE /* Ryan */,
-				77170D04197591FE00C288EE /* RyanTests */,
+				77170CE3197591FD00C288EE /* SitWith */,
+				77170D04197591FE00C288EE /* SitWithTests */,
 			);
 		};
 /* End PBXProject section */
@@ -459,7 +461,7 @@
 /* Begin PBXTargetDependency section */
 		77170D0B197591FE00C288EE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 77170CE3197591FD00C288EE /* Ryan */;
+			target = 77170CE3197591FD00C288EE /* SitWith */;
 			targetProxy = 77170D0A197591FE00C288EE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -572,10 +574,10 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ryan/Ryan-Prefix.pch";
-				INFOPLIST_FILE = "Ryan/Ryan-Info.plist";
+				GCC_PREFIX_HEADER = "Ryan/SitWith-Prefix.pch";
+				INFOPLIST_FILE = "Ryan/SitWith-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SitWith;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -590,10 +592,10 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ryan/Ryan-Prefix.pch";
-				INFOPLIST_FILE = "Ryan/Ryan-Info.plist";
+				GCC_PREFIX_HEADER = "Ryan/SitWith-Prefix.pch";
+				INFOPLIST_FILE = "Ryan/SitWith-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SitWith;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -613,8 +615,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "RyanTests/RyanTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "RyanTests/SitWithTests-Info.plist";
+				PRODUCT_NAME = SitWithTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -631,8 +633,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ryan/Ryan-Prefix.pch";
-				INFOPLIST_FILE = "RyanTests/RyanTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "RyanTests/SitWithTests-Info.plist";
+				PRODUCT_NAME = SitWithTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -641,7 +643,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		77170CDF197591FD00C288EE /* Build configuration list for PBXProject "Ryan" */ = {
+		77170CDF197591FD00C288EE /* Build configuration list for PBXProject "SitWith" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77170D14197591FE00C288EE /* Debug */,
@@ -650,7 +652,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		77170D16197591FE00C288EE /* Build configuration list for PBXNativeTarget "Ryan" */ = {
+		77170D16197591FE00C288EE /* Build configuration list for PBXNativeTarget "SitWith" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77170D17197591FE00C288EE /* Debug */,
@@ -659,7 +661,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		77170D19197591FE00C288EE /* Build configuration list for PBXNativeTarget "RyanTests" */ = {
+		77170D19197591FE00C288EE /* Build configuration list for PBXNativeTarget "SitWithTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				77170D1A197591FE00C288EE /* Debug */,

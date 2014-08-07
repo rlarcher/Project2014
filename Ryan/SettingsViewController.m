@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "AppDelegate.h"
 
 @interface SettingsViewController ()
 
@@ -31,14 +32,32 @@
         [self.visit addTarget:self action:@selector(visitSite:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.visit];
         
+        // button to see what to expect (FAQ)
         self.fqButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.fqButton.frame = CGRectMake(40, 130, 200, 50);
         [self.fqButton setTitle:@"What To Expect" forState:UIControlStateNormal];
         [self.fqButton addTarget:self action:@selector(showfq:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.fqButton];
         
+        // button for user to delete account
+        self.delete = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.delete.frame = (CGRectMake(40, 180, 200, 50));
+        [self.delete setTitle:@"Delete Account" forState:UIControlStateNormal];
+        [self.view addSubview:self.delete];
+        
+        // now add the target
+        [self.delete addTarget:self action:@selector(deleteAccount:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
+}
+
+-(void)deleteAccount:(UIButton *)sender
+{
+    // delete the user's account
+    NSString *baseUrl = [NSString stringWithFormat:@"%@/deleteUser?email=%@",serverAddress,userEmail];
+    NSURL *url = [NSURL URLWithString:baseUrl];
+    NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+    [parser parse];
 }
 
 -(void)showfq:(UIButton *)sender

@@ -48,6 +48,26 @@
         NSString *restaurant_name = [signUpLunch restaurantName];
         NSString *user_name = userName;
         NSString *lunchtabletime = [signUpLunch lunchtabletime];
+        
+        // get rid of space in user name
+        NSMutableString *newUserName = [[NSMutableString alloc]init];
+        for (int i = 0; i < [user_name length]; i++) {
+            if(![[user_name substringWithRange:NSMakeRange(i, 1)] isEqualToString:@" "])
+            {
+                newUserName = (NSMutableString *)[NSString stringWithFormat:@"%@%@",newUserName,[user_name substringWithRange:NSMakeRange(i, 1)]];
+            }
+        }
+        user_name = (NSString *)newUserName;
+        
+        // get rid of space in restaurant name
+        NSMutableString *newRestaurantName = [[NSMutableString alloc]init];
+        for (int i = 0; i < [restaurant_name length]; i++) {
+            if(![[restaurant_name substringWithRange:NSMakeRange(i, 1)] isEqualToString:@" "])
+            {
+                newRestaurantName = (NSMutableString *)[NSString stringWithFormat:@"%@%@",newRestaurantName,[restaurant_name substringWithRange:NSMakeRange(i, 1)]];
+            }
+        }
+        restaurant_name = (NSString *)newRestaurantName;
         // add the user to the lunch
         // here is the base url SitWithWebServer/addRequestTobeProcessed?lunchtable_id=& restaurant_id=& restaurant_name= &email= &user_name= &lunchtabletime=
         /*

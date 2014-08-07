@@ -453,6 +453,8 @@
     // restaurant object for selection
     signUpLunch = [[UpcomingLunch alloc]init];
     
+    // set up the parser
+    // use global serverAddress variable from AppDelegate
     NSString *server = [NSString stringWithFormat:@"%@/getNotFilledUpcomingLunchTable?email=%@",serverAddress,userEmail];
     NSURL *url = [NSURL URLWithString:server];
     NSData *xmlData = [NSData dataWithContentsOfURL:url];
@@ -460,6 +462,8 @@
     [parser setDelegate:self];
     BOOL result = [parser parse];
     if(!result) NSLog(@"Oh no that parse thing didn't go so well");
+    
+    
     self.title = @"Find Lunches";
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -487,6 +491,7 @@
     // display the picture for the number of seats left
     self.availabilityPic = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"emptyTable"]];
     NSString *myCount = [firstLunch count];
+    // change picture based on number of people signed up
     if([myCount isEqualToString:@"0"])
     {
         [self.availabilityPic setImage:[UIImage imageNamed:@"emptyTable"]];

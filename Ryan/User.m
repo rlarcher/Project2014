@@ -5,6 +5,7 @@
 //  Created by William Lutz on 8/1/14.
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
+// Class for SitWith users
 
 #import "User.h"
 
