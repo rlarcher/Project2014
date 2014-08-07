@@ -37,8 +37,8 @@
         userPastLunchObjects = [[NSMutableArray alloc]init];
         
         // start the parsing
-        NSString *sampleEmail = @"terryyangty619@gmail.com";
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/getPastTableByUserEmail?email=%@", serverAddress, sampleEmail]];
+        //NSString *sampleEmail = @"terryyangty619@gmail.com";
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/getPastTableByUserEmail?email=%@", serverAddress, userEmail]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
         BOOL result = [parser parse];
@@ -56,38 +56,37 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.pastLunchArray = @[@"Sharp Edge Bistro",@"Harris Grill"];
     
-    // get the initial past lunch object
-    PastLunch *firstPastLunch = userPastLunchObjects[self.pastLunchIndex];
-    
     // create the text view for the guests and add it to the view
     self.myText = [[UITextView alloc]initWithFrame:CGRectMake(10, 40, 200, 150)];
     if([userPastLunchObjects count] > 0)
     {
+        // get the initial past lunch object
+        PastLunch *firstPastLunch = userPastLunchObjects[self.pastLunchIndex];
         self.myText.text = [NSString stringWithFormat:@"You previously had a lunch at %@ with %@, %@, %@, and %@",[firstPastLunch restaurantName],[firstPastLunch user1FirstName],[firstPastLunch user2FirstName],[firstPastLunch user3FirstName],[firstPastLunch user4FirstName]];
+        
+        // button to send feedback
+        self.feedback = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.feedback.frame = CGRectMake(150, 100, 200, 100);
+        [self.feedback setTitle:@"Send Feedback" forState:UIControlStateNormal];
+        [self.view addSubview:self.feedback];
+        
+        // add target to the feedback button
+        [self.feedback addTarget:self action:@selector(sendFeedback:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // button to show the next past lunch
+        UIButton *nextPastLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        nextPastLunch.frame = CGRectMake(60, 180, 200, 60);
+        [nextPastLunch setTitle:@"Next Past Lunch" forState:UIControlStateNormal];
+        [self.view addSubview:nextPastLunch];
+        
+        // add the target for the next past lunch button
+        [nextPastLunch addTarget:self action:@selector(nextLunch:) forControlEvents:UIControlEventTouchUpInside];
     }
     else{
         self.myText.text = @"You do not have any past lunches";
     }
     self.myText.editable = NO;
     [self.view addSubview:self.myText];
-    
-    // button to send feedback
-    self.feedback = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.feedback.frame = CGRectMake(150, 100, 200, 100);
-    [self.feedback setTitle:@"Send Feedback" forState:UIControlStateNormal];
-    [self.view addSubview:self.feedback];
-    
-    // add target to the feedback button
-    [self.feedback addTarget:self action:@selector(sendFeedback:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // button to show the next past lunch
-    UIButton *nextPastLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    nextPastLunch.frame = CGRectMake(60, 180, 200, 60);
-    [nextPastLunch setTitle:@"Next Past Lunch" forState:UIControlStateNormal];
-    [self.view addSubview:nextPastLunch];
-    
-    // add the target for the next past lunch button
-    [nextPastLunch addTarget:self action:@selector(nextLunch:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 

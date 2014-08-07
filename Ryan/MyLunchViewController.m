@@ -32,7 +32,7 @@
         self.upcomingLunchIndex = 0;
         userUpcomingLunchObjects = [[NSMutableArray alloc]init];
         
-        NSString *theEmail = @"lippmanj@hotmail.com";
+        NSString *theEmail = userEmail;
         // for now this is a sample email but it will eventually be the line of code below
         
         // NSString *theEmail = userEmail;
@@ -153,7 +153,7 @@
     
     self.title = @"Current Lunches";
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
+
     // get first upcoming lunch object
     if([userUpcomingLunchObjects count] > 0)
     {
@@ -161,6 +161,22 @@
         self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 100, 100)];
         // just leave with no lunches for now
         self.lunch.text = [NSString stringWithFormat:@"%@ %@",[firstUpcomingLunch restaurant],[firstUpcomingLunch date]];
+        
+        self.cancel = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.cancel.frame = CGRectMake(210, 60, 100, 100);
+        [self.cancel setTitle:@"Cancel Lunch" forState:UIControlStateNormal];
+        [self.cancel addTarget:self action:@selector(confirmRemoveLunch:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.cancel];
+        
+        // button to see next upcoming lunch
+        self.next = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.next.frame = CGRectMake(40, 150, 250, 40);
+        [self.next setTitle:@"Next Upcoming Lunch" forState:UIControlStateNormal];
+        [self.view addSubview:self.next];
+        
+        // target for next button
+        [self.next addTarget:self action:@selector(nextLunch:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     else
     {
@@ -169,22 +185,7 @@
     }
     [self.lunch setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.lunch];
-    
-    self.cancel = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.cancel.frame = CGRectMake(210, 60, 100, 100);
-    [self.cancel setTitle:@"Cancel Lunch" forState:UIControlStateNormal];
-    [self.cancel addTarget:self action:@selector(confirmRemoveLunch:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.cancel];
-    
-    // button to see next upcoming lunch
-    self.next = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.next.frame = CGRectMake(40, 150, 250, 40);
-    [self.next setTitle:@"Next Upcoming Lunch" forState:UIControlStateNormal];
-    [self.view addSubview:self.next];
-    
-    // target for next button
-    [self.next addTarget:self action:@selector(nextLunch:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     self.confirmView = [[UIViewController alloc]init];
     self.confirmView.view.frame = self.view.frame;
     
@@ -214,7 +215,7 @@
     NSString *requesttobeprocessed_id = [currentUpcomingLunch requesttobeprocessed_id];
     NSString *lunchtable_id = [currentUpcomingLunch lunchtable_id];
     NSString *email = [currentUpcomingLunch email];
-    
+
     NSString *fullUrl = [NSString stringWithFormat:@"%@/deleteRequesttobeprocessed?requesttobeprocessed_id=%@&lunchtable_id=%@&email=%@",serverAddress,requesttobeprocessed_id,lunchtable_id,email];
     NSURL *url = [NSURL URLWithString:fullUrl];
     //NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];

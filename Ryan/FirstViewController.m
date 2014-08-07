@@ -68,7 +68,7 @@
         
         // make button a link to the new viewcontroller
         [self.viewLunches addTarget:self action:@selector(showLunches:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         // button to view user's lunches
         self.myLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.myLunches.frame = CGRectMake(60, 445, 200, 44);
