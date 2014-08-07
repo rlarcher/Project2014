@@ -51,7 +51,7 @@
         // add the user to the lunch
         // here is the base url SitWithWebServer/addRequestTobeProcessed?lunchtable_id=& restaurant_id=& restaurant_name= &email= &user_name= &lunchtabletime=
         /*
-        NSString *serverurl = @"urlgoeshere";
+        NSString *serverurl = [NSString stringWithFormat:@"%@/addRequestTobeProcessed?lunchtable_id=%@&restaurant_id=%@&restaurant_name=%@&email=%@&user_name=%@&lunchtabletime=%@",lunchtable_id,restaurant_id,restaurant_name,email,user_name,lunchtabletime];
         NSURL *url = [NSURL URLWithString:serverurl];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser parse];

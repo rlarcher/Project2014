@@ -49,6 +49,7 @@ NSMutableArray *restaurantObjects;
 NSMutableArray *userPastLunchObjects;
 NSMutableArray *userUpcomingLunchObjects;
 
+// this will hold the server address
 NSString *serverAddress;
 
 

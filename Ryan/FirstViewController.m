@@ -61,8 +61,8 @@
         self.viewLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.viewLunches.frame = CGRectMake(60, 410, 200, 44);
         [self.viewLunches setTitle:@"View Available Lunches" forState:UIControlStateNormal];
-        [self.viewLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
-        [self.viewLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+        [self.viewLunches setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        //[self.viewLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
         //[self.view addSubview:self.viewLunches];
         
         // make button a link to the new viewcontroller
@@ -72,8 +72,8 @@
         self.myLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.myLunches.frame = CGRectMake(60, 445, 200, 44);
         [self.myLunches setTitle:@"My Current Lunches" forState:UIControlStateNormal];
-        [self.myLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
-        [self.myLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+        [self.myLunches setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        //[self.myLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
         //[self.view addSubview:self.myLunches];
         
         // make button link to new viewcontroller
@@ -83,8 +83,8 @@
         self.pastLunches = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.pastLunches.frame = CGRectMake(60, 375, 200, 44);
         [self.pastLunches setTitle:@"Past Lunches" forState:UIControlStateNormal];
-        [self.pastLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
-        [self.pastLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+        [self.pastLunches setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+        //[self.pastLunches setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
         //[self.view addSubview:self.pastLunches];
         
         // make button link to past lunch view
@@ -211,9 +211,13 @@
     {
         // add user to database
         /*
-        NSString *baseURL = @"http://54.191.127.201:8080/SitWithWebServer/createNewUser?user_id= &name= &gender= &age= &email= &usertype=";
         NSString *name = userName;
         NSString *email = userEmail;
+        NSString *user_id = @"12345";
+        NSString *gender = @"male";
+        NSString *age = @"23";
+        NSString *usertype = @"";
+        NSString *baseURL = [NSString stringWithFormat:@"%@/createNewUser?user_id=%@&name=%@&gender=%@&age=%@&email=%@&usertype=%@",serverAddress,user_id,name,gender,age,email,usertype];
         NSURL *url = [NSURL URLWithString:baseURL];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser parse];

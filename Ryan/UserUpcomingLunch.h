@@ -32,7 +32,7 @@
 
 - (NSString *)restaurant_id;
 
-- (NSString *)requestobeprocessed_id;
+- (NSString *)requesttobeprocessed_id;
 
 // set methods
 - (void)setUserName:(NSString *)input;

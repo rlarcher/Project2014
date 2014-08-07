@@ -13,7 +13,6 @@
 
 @property BOOL parsingUserName;
 @property BOOL foundUserName;
-@property int num;
 
 - (BOOL)searchForUser;
 

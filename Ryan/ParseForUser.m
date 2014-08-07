@@ -15,11 +15,10 @@
 -(BOOL)searchForUser
 {
     self.foundUserName = NO;
-    NSString *serverURL = @"http://54.191.127.201:8080/SitWithWebServer/getAllUser";
+    NSString *serverURL = [NSString stringWithFormat:@"%@/getAllUser",serverAddress];
     NSURL *url = [NSURL URLWithString:serverURL];
     NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
     [parser setDelegate:self];
-    self.num = 0;
     [parser parse];
     return self.foundUserName;
 }
@@ -37,7 +36,6 @@
     if([elementName isEqualToString:@"name"])
     {
         self.parsingUserName = NO;
-        self.num += 1;
     }
 }
 

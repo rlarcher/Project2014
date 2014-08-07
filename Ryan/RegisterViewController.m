@@ -66,6 +66,10 @@
     NSString *email = userEmail;
     NSString *user_name = userName;
     
+    NSString *url = [NSString stringWithFormat:@"%@/createLunchTableWithJoin?availablebegintime=%@&restaurant_id=%@&email=%@&user_name=%@",serverAddress,availablebegintime,restaurant_id,email,user_name];
+    NSURL *serverUrl = [NSURL URLWithString:url];
+    //NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:serverUrl];
+    //[parser parse];
     [self.alertConfirm show];
     SecondViewController *secondViewController = [[SecondViewController alloc] init];
     [self.navigationController pushViewController:secondViewController animated:YES];

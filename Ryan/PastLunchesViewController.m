@@ -38,7 +38,7 @@
         
         // start the parsing
         NSString *sampleEmail = @"terryyangty619@gmail.com";
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getPastTableByUserEmail?email=%@",sampleEmail]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/getPastTableByUserEmail?email=%@", serverAddress, sampleEmail]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
         BOOL result = [parser parse];

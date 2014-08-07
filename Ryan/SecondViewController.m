@@ -134,7 +134,7 @@
 // function called when parser reaches the beginning of an element
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
     {
-        NSLog(elementName);
+        //NSLog(elementName);
         if([elementName isEqualToString:@"LunchTable"])
         {
             self.currentLunch = [[UpcomingLunch alloc]init];
@@ -453,14 +453,13 @@
     // restaurant object for selection
     signUpLunch = [[UpcomingLunch alloc]init];
     
-    NSString *server = [NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getNotFilledUpcomingLunchTable?email=%@",userEmail];
+    NSString *server = [NSString stringWithFormat:@"%@/getNotFilledUpcomingLunchTable?email=%@",serverAddress,userEmail];
     NSURL *url = [NSURL URLWithString:server];
     NSData *xmlData = [NSData dataWithContentsOfURL:url];
     NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];
     [parser setDelegate:self];
     BOOL result = [parser parse];
     if(!result) NSLog(@"Oh no that parse thing didn't go so well");
-    
     self.title = @"Find Lunches";
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -568,8 +567,8 @@
     UIButton *nextLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     nextLunch.frame = CGRectMake(70, 420, 100, 44);
     [nextLunch setTitle:@"Skip" forState:UIControlStateNormal];
-    [nextLunch setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
-    [nextLunch setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+    [nextLunch setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [nextLunch setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateHighlighted];
     [self.view addSubview:nextLunch];
     
     // call function that will change lunch info
@@ -590,8 +589,8 @@
     UIButton *signUp = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     signUp.frame = CGRectMake(140, 420, 100, 44);
     [signUp setTitle:@"Join" forState:UIControlStateNormal];
-    [signUp setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
-    [signUp setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+    [signUp setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [signUp setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateHighlighted];
     [self.view addSubview:signUp];
     
     // call the function when the user clicks the sign up button
@@ -601,8 +600,8 @@
     UIButton *makeLunch = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     makeLunch.frame = CGRectMake(60, 450, 200, 44);
     [makeLunch setTitle:@"Make Lunch" forState:UIControlStateNormal];
-    [makeLunch setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateNormal];
-    [makeLunch setTitleColor:[UIColor colorWithRed:0 green:0.68 blue:0.28 alpha:1] forState:UIControlStateHighlighted];
+    [makeLunch setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [makeLunch setTitleColor:[UIColor colorWithRed:0 green:0.478431 blue:1.0 alpha:1.0] forState:UIControlStateHighlighted];
     [self.view addSubview:makeLunch];
     
     // call function to change the view on button press

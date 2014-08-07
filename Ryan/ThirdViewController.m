@@ -36,7 +36,7 @@
         self.parsingPicture = NO;
         self.parsingRestaurant_id = NO;
         
-        NSString *server = @"http://54.191.127.201:8080/SitWithWebServer/getRestaurants";
+        NSString *server = [NSString stringWithFormat:@"%@/getRestaurants",serverAddress];
         NSURL *url = [NSURL URLWithString:server];
         NSData *xmlData = [NSData dataWithContentsOfURL:url];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithData:xmlData];

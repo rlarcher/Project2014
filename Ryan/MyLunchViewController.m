@@ -32,8 +32,9 @@
         
         NSString *theEmail = @"lippmanj@hotmail.com";
         // for now this is a sample email but it will eventually be the line of code below
+        
         // NSString *theEmail = userEmail;
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://54.191.127.201:8080/SitWithWebServer/getUpcomingRequestTobeProcessedByEmail?email=%@",theEmail]];
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/getUpcomingRequestTobeProcessedByEmail?email=%@",serverAddress,theEmail]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
         BOOL result = [parser parse];
@@ -44,7 +45,7 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    NSLog(@"%@",elementName);
+    //NSLog(@"%@",elementName);
     // create new upcoming lunch object
     if([elementName isEqualToString:@"RequestTobeProcessed"])
     {
@@ -207,17 +208,14 @@
     [self.confirm show];
     //SitWithWebServer/deleteRequesttobeprocessed?requesttobeprocessed_id= &lunchtable_id= &email=
     UserUpcomingLunch *currentUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
-    NSString *requesttobeprocessed_id = [currentUpcomingLunch requestobeprocessed_id];
+    NSString *requesttobeprocessed_id = [currentUpcomingLunch requesttobeprocessed_id];
     NSString *lunchtable_id = [currentUpcomingLunch lunchtable_id];
     NSString *email = [currentUpcomingLunch email];
     
-    /*
-    NSString *baseUrl = @"The base url goes here";
-    NSString *fullUrl = @"Add the lunch info from above to this string";
+    NSString *fullUrl = [NSString stringWithFormat:@"%@/deleteRequesttobeprocessed?requesttobeprocessed_id=%@&lunchtable_id=%@&email=%@",serverAddress,requesttobeprocessed_id,lunchtable_id,email];
     NSURL *url = [NSURL URLWithString:fullUrl];
-    NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
-    [parser parse];
-    */
+    //NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+    //[parser parse];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
