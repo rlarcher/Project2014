@@ -189,7 +189,7 @@
     self.confirmView = [[UIViewController alloc]init];
     self.confirmView.view.frame = self.view.frame;
     
-    self.confirm = [[UIAlertView alloc] initWithTitle:@"Cancel Lunch" message:@"Are you sure you want to remove yourself from this lunch" delegate:nil cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    self.confirm = [[UIAlertView alloc] initWithTitle:@"Cancel Lunch" message:@"You have been removed from this lunch" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     self.confirm.transform = CGAffineTransformMakeTranslation(25, 25);
 }
 

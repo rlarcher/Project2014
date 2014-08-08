@@ -58,6 +58,7 @@
 		77817108199128340027506D /* UserUpcomingLunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77817107199128340027506D /* UserUpcomingLunch.m */; };
 		7781710B19916FE70027506D /* ConfirmAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710A19916FE70027506D /* ConfirmAlertViewController.m */; };
 		7781710E1992A2750027506D /* ParseForUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710D1992A2750027506D /* ParseForUser.m */; };
+		77817113199509880027506D /* SitWithLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 77817112199509880027506D /* SitWithLogo.png */; };
 		778799F219894A6A002AA39A /* emptyTable.png in Resources */ = {isa = PBXBuildFile; fileRef = 778799F119894A6A002AA39A /* emptyTable.png */; };
 		778799F5198972B4002AA39A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778799F4198972B4002AA39A /* SettingsViewController.m */; };
 		77879A68198BD611002AA39A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 77879A67198BD611002AA39A /* User.m */; };
@@ -135,6 +136,7 @@
 		7781710A19916FE70027506D /* ConfirmAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmAlertViewController.m; sourceTree = "<group>"; };
 		7781710C1992A2750027506D /* ParseForUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseForUser.h; sourceTree = "<group>"; };
 		7781710D1992A2750027506D /* ParseForUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseForUser.m; sourceTree = "<group>"; };
+		77817112199509880027506D /* SitWithLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SitWithLogo.png; sourceTree = "<group>"; };
 		778799F119894A6A002AA39A /* emptyTable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emptyTable.png; path = "../../SitWith Pics/emptyTable.png"; sourceTree = "<group>"; };
 		778799F3198972B4002AA39A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		778799F4198972B4002AA39A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				77170D5E19881E4000C288EE /* Resources */,
 				77170D481987F2A800C288EE /* 1Table.png */,
 				778799F119894A6A002AA39A /* emptyTable.png */,
+				77817112199509880027506D /* SitWithLogo.png */,
 				77170D4A1987F2B800C288EE /* 2Table.png */,
 				77170D4B1987F2B800C288EE /* 3Table.png */,
 				77170D4C1987F2B800C288EE /* 4Table.png */,
@@ -394,6 +397,7 @@
 				77170D5C1988118100C288EE /* one_lunchtable.xml in Resources */,
 				77170D371980171A00C288EE /* sharpedgebistro.png in Resources */,
 				77170D581988118100C288EE /* restaurant_list.xml in Resources */,
+				77817113199509880027506D /* SitWithLogo.png in Resources */,
 				77170D3319800B6E00C288EE /* UnionGrill.png in Resources */,
 				778799F219894A6A002AA39A /* emptyTable.png in Resources */,
 				77170D1F1975A76500C288EE /* rsz_sitwith.png in Resources */,
@@ -565,7 +569,7 @@
 		77170D17197591FE00C288EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -583,7 +587,7 @@
 		77170D18197591FE00C288EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
