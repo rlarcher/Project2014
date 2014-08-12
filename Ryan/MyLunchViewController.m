@@ -33,9 +33,6 @@
         userUpcomingLunchObjects = [[NSMutableArray alloc]init];
         
         NSString *theEmail = userEmail;
-        // for now this is a sample email but it will eventually be the line of code below
-        
-        // NSString *theEmail = userEmail;
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/getUpcomingRequestTobeProcessedByEmail?email=%@",serverAddress,theEmail]];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         [parser setDelegate:self];
@@ -190,8 +187,8 @@
     }
     else
     {
-        self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 100, 100)];
-        self.lunch.text = @"You do not have any lunches now";
+        self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 120, 100)];
+        self.lunch.text = @"No current lunches";
     }
     [self.lunch setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:self.lunch];

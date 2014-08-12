@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
 // This is the ViewController for the User looking through
-// available lunches
+// available restaurants in order to make a lunch
 
 #import "ThirdViewController.h"
 #import "AppDelegate.h"

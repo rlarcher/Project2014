@@ -5,7 +5,8 @@
 //  Created by William Lutz on 7/23/14.
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
-// When user creates a lunch
+// When user creates a lunch this is the confimation screen
+// the unused functions can be used to add lunch to calendar
 
 #import "FirstViewController.h"
 #import "RegisterViewController.h"
@@ -35,8 +36,11 @@
     // Do any additional setup after loading the view.
     // allocate dateformatter in order to get string from nsdate
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:chosenDate];
+    
+    // for google calendar
     _arrGoogleCalendars = [[NSMutableArray alloc]init];
     _dictCurrentCalendar = [[NSDictionary alloc]init];
+    
     long year = [components year];
     int month = [components month];
     int day = [components day];
@@ -54,12 +58,12 @@
     
     // button to confirm created lunch
     UIButton *confirm = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    confirm.frame = CGRectMake(60, 200, 150, 100);
+    confirm.frame = CGRectMake(60, 200, 150, 50);
     [confirm setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.view addSubview:confirm];
     
     UIButton *add = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    add.frame = CGRectMake(20, 250, 250, 100);
+    add.frame = CGRectMake(20, 250, 250, 50);
     [add setTitle:@"Add to Calendar" forState:UIControlStateNormal];
     [self.view addSubview:add];
     
@@ -72,13 +76,8 @@
 }
 
 - (void)addCalendar:(UIButton *)sender {
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:chosenDate];
-    long day = (long)[components day];
-    long month = (long)[components month];
-    long year = (long)[components year];
-    NSString *googleurl = [NSString stringWithFormat:@"https://www.google.com/calendar/render?tab=mc&date=%ld%02ld%02ld",year,month,day];
-    NSURL *url = [NSURL URLWithString:googleurl];
-    //[[ UIApplication sharedApplication]openURL:url];
+    // THIS IS THE START OF ADDING TO GOOGLE CALENDAR
+
     /*
     self.googleAccess = [[GoogleAccess alloc] initWithFrame:self.view.frame];
     [self.googleAccess setGOAuthDelegate:self];
@@ -99,12 +98,13 @@
       postParameterValues:[NSArray arrayWithObjects:[_dictCurrentCalendar objectForKey:@"id"], lunchText, nil]];
     */
     
+    // add to default iPhone calendar
     EKEventStore *store = [[EKEventStore alloc] init];
     [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
         if (!granted) { return; }
         EKEvent *event = [EKEvent eventWithEventStore:store];
         event.title = @"SitWith Lunch";
-        event.startDate = chosenDate; //today
+        event.startDate = chosenDate; //date chosen by user
         event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
         [event setCalendar:[store defaultCalendarForNewEvents]];
         NSError *err = nil;
@@ -207,6 +207,7 @@
     
     NSString *availablebegintime = self.myDate;
     // get rid of space in user name
+    /*
     NSMutableString *newString = [[NSMutableString alloc]init];
     for (int i = 0; i < [user_name length]; i++) {
         if(![[user_name substringWithRange:NSMakeRange(i, 1)] isEqualToString:@" "])
@@ -223,11 +224,14 @@
         }
     }
     // get rid of space in date
+     */
     NSString *newDate = [NSString stringWithFormat:@"%@.0",availablebegintime];
 
     availablebegintime = [newDate stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    user_name = (NSString *)newString;
-    restaurant_name = (NSString *)newRestString;
+    user_name = [user_name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    restaurant_name = [restaurant_name stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    //user_name = (NSString *)newString;
+    //restaurant_name = (NSString *)newRestString;
     NSString *url = [NSString stringWithFormat:@"%@/createLunchTableWithJoin?availablebegintime=%@&restaurant_id=%@&restaurant_name=%@&email=%@&user_name=%@",serverAddress,availablebegintime,restaurant_id,restaurant_name,email,user_name];
     NSURL *serverUrl = [NSURL URLWithString:url];
     NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:serverUrl];

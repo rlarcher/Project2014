@@ -5,6 +5,8 @@
 //  Created by William Lutz on 7/15/14.
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
+// This is where a user signs up for a lunch that has already been created
+
 #import "AppDelegate.h"
 #import "FirstViewController.h"
 #import "SecondViewController.h"
