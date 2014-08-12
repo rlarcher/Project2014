@@ -134,7 +134,7 @@
 // function called when parser reaches the beginning of an element
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
     {
-        //NSLog(elementName);
+        
         if([elementName isEqualToString:@"LunchTable"])
         {
             self.currentLunch = [[UpcomingLunch alloc]init];
@@ -167,7 +167,7 @@
         {
             self.parsingAvailability = YES;
         }
-        if([elementName isEqualToString:@"lunchtable_id"])
+        if([elementName isEqualToString:@"id"])
         {
             self.parsingLunchtable_id = YES;
         }
@@ -182,7 +182,6 @@
     }
 // parser reached the end of an element
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-        //NSLog(elementName);
         if([elementName isEqualToString:@"count"])
         {
             self.parsingCount = NO;
@@ -207,7 +206,7 @@
         {
             self.parsingAvailability = NO;
         }
-        if([elementName isEqualToString:@"lunchtable_id"])
+        if([elementName isEqualToString:@"id"])
         {
             self.parsingLunchtable_id = NO;
         }

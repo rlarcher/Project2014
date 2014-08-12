@@ -112,7 +112,6 @@
         
         // add target for contact button
         //[self.contact addTarget:self action:@selector(showEmail:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return self;
 }
@@ -221,7 +220,7 @@
                 newString = (NSMutableString *)[NSString stringWithFormat:@"%@%@",newString,[name substringWithRange:NSMakeRange(i, 1)]];
             }
         }
-        /*
+        
         name = (NSString *)newString;
         NSString *email = userEmail;
         NSString *user_id = @"12345";
@@ -233,11 +232,13 @@
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
         BOOL result = [parser parse];
         if(!result)NSLog(parser.parserError.localizedDescription);
-        */
+        
     }
+    
     [self.view addSubview:self.pastLunches];
     [self.view addSubview:self.viewLunches];
     [self.view addSubview:self.myLunches];
+     
 }
 
 -(void) showSettings:(UIButton *)sender

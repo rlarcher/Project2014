@@ -6,8 +6,11 @@
 //  Copyright (c) 2014 SitWith. All rights reserved.
 //
 
+// When user signs up for an already existing lunch
+
 #import "ConfirmAlertViewController.h"
 #import "AppDelegate.h"
+#import <EventKit/EventKit.h>
 
 @interface ConfirmAlertViewController ()
 
@@ -21,7 +24,7 @@
     if (self) {
         // Custom initialization
         [self.view setBackgroundColor:[UIColor whiteColor]];
-        self.confirm = [[UIAlertView alloc] initWithTitle:@"Confirm lunch" message:
+        self.confirm = [[UIAlertView alloc] initWithTitle:@"Confirm lunch and add to calendar?" message:
                               [NSString stringWithFormat:@"Confirm lunch for %@? ", lunchDateAndTime] delegate:self cancelButtonTitle:@"No"
                                               otherButtonTitles:@"Yes",nil];
         [self.confirm show];
@@ -47,7 +50,10 @@
         NSString *restaurant_id = [signUpLunch restaurant_id];
         NSString *restaurant_name = [signUpLunch restaurantName];
         NSString *user_name = userName;
-        NSString *lunchtabletime = [signUpLunch lunchtabletime];
+        NSString *oldlunchtabletime = [signUpLunch time];
+        NSString *email = userEmail;
+        
+        NSString *lunchtabletime = [oldlunchtabletime stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         
         // get rid of space in user name
         NSMutableString *newUserName = [[NSMutableString alloc]init];
@@ -68,14 +74,29 @@
             }
         }
         restaurant_name = (NSString *)newRestaurantName;
+        
         // add the user to the lunch
         // here is the base url SitWithWebServer/addRequestTobeProcessed?lunchtable_id=& restaurant_id=& restaurant_name= &email= &user_name= &lunchtabletime=
-        /*
-        NSString *serverurl = [NSString stringWithFormat:@"%@/addRequestTobeProcessed?lunchtable_id=%@&restaurant_id=%@&restaurant_name=%@&email=%@&user_name=%@&lunchtabletime=%@",lunchtable_id,restaurant_id,restaurant_name,email,user_name,lunchtabletime];
+        
+        NSString *lunchtime = [lunchtabletime stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+        lunchtabletime = [NSString stringWithFormat:@"%@:00.0",lunchtime];
+        NSString *serverurl = [NSString stringWithFormat:@"%@/addRequestTobeProcessed?lunchtable_id=%@&restaurant_id=%@&restaurant_name=%@&email=%@&user_name=%@&lunchtabletime=%@",serverAddress,lunchtable_id,restaurant_id,restaurant_name,email,user_name,lunchtime];
         NSURL *url = [NSURL URLWithString:serverurl];
         NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+        NSLog(@"\n%@\n%@\n%@\n%@\n%@\n%@",lunchtable_id,restaurant_id,restaurant_name,email,user_name,lunchtime);
         [parser parse];
-        */
+        EKEventStore *store = [[EKEventStore alloc] init];
+        [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+            if (!granted) { return; }
+            EKEvent *event = [EKEvent eventWithEventStore:store];
+            event.title = @"SitWith Lunch";
+            event.startDate = chosenDate; //today
+            event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
+            [event setCalendar:[store defaultCalendarForNewEvents]];
+            NSError *err = nil;
+            [store saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+            NSString *savedEventId = event.eventIdentifier;  //this is so you can access this event later
+        }];
         // go back to previous view
         [self.navigationController popViewControllerAnimated:YES];
     }
@@ -85,6 +106,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // here is the google stuff so it can easily be removed
+    self.googleAccess = [[GoogleAccess alloc] initWithFrame:self.view.frame];
+    [self.googleAccess setGOAuthDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning

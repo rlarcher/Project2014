@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoogleAccess.h"
 
-@interface RegisterViewController : UIViewController
+@interface RegisterViewController : UIViewController <GoogleOAuthDelegate>
 @property UILabel *restaurant;
 @property UIAlertView *alertConfirm;
+@property NSString *myDate;
+@property GoogleAccess *googleAccess;
+@property NSDictionary *dictCurrentCalendar;
+@property NSMutableArray *arrGoogleCalendars;
+
 @end

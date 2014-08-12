@@ -84,7 +84,7 @@
     {
         self.parsingPicture = YES;
     }
-    if([elementName isEqualToString:@"restaurant_id"])
+    if([elementName isEqualToString:@"id"])
     {
         self.parsingRestaurant_id = YES;
     }
@@ -114,7 +114,7 @@
     {
         self.parsingPicture = NO;
     }
-    if([elementName isEqualToString:@"restaurant_id"])
+    if([elementName isEqualToString:@"id"])
     {
         self.parsingRestaurant_id = NO;
     }

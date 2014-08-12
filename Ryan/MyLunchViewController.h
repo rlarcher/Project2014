@@ -24,5 +24,6 @@
 @property BOOL parsingRestaurant;
 @property BOOL parsingRestaurant_id;
 @property BOOL parsingLunchtable_id;
+@property BOOL parsingRequest_id;
 @property int upcomingLunchIndex;
 @end

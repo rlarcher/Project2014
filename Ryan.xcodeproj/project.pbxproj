@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7712091119954BA2000BDE52 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7712091019954BA2000BDE52 /* FacebookSDK.framework */; };
+		7712091319954C94000BDE52 /* SitWithSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 7712091219954C94000BDE52 /* SitWithSmall.png */; };
 		77170CE8197591FD00C288EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170CE7197591FD00C288EE /* Foundation.framework */; };
 		77170CEA197591FD00C288EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170CE9197591FD00C288EE /* CoreGraphics.framework */; };
 		77170CEC197591FD00C288EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170CEB197591FD00C288EE /* UIKit.framework */; };
@@ -25,8 +27,6 @@
 		77170D241975A8C400C288EE /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D231975A8C400C288EE /* FirstViewController.m */; };
 		77170D271975A96E00C288EE /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D261975A96E00C288EE /* SecondViewController.m */; };
 		77170D2A1975A9CA00C288EE /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D291975A9CA00C288EE /* ThirdViewController.m */; };
-		77170D2C1975BF9B00C288EE /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77170D2B1975BF9B00C288EE /* FacebookSDK.framework */; };
-		77170D2E1975C66400C288EE /* SitWithSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D2D1975C66400C288EE /* SitWithSmall.png */; };
 		77170D31197FF7B400C288EE /* MyLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77170D30197FF7B400C288EE /* MyLunchViewController.m */; };
 		77170D3319800B6E00C288EE /* UnionGrill.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D3219800B6E00C288EE /* UnionGrill.png */; };
 		77170D3519800ED800C288EE /* HarrisGrill.png in Resources */ = {isa = PBXBuildFile; fileRef = 77170D3419800ED800C288EE /* HarrisGrill.png */; };
@@ -53,6 +53,7 @@
 		77170D631988203A00C288EE /* one_restaurant.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D541988118100C288EE /* one_restaurant.xml */; };
 		77170D641988203A00C288EE /* one_lunchtable.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D551988118100C288EE /* one_lunchtable.xml */; };
 		77170D651988203A00C288EE /* lunchtable_list.xml in Resources */ = {isa = PBXBuildFile; fileRef = 77170D561988118100C288EE /* lunchtable_list.xml */; };
+		771892A719992E3D0011EEA1 /* GoogleAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 771892A619992E3D0011EEA1 /* GoogleAccess.m */; };
 		778171021990127C0027506D /* PastLunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 778171011990127C0027506D /* PastLunch.m */; };
 		7781710519911F6B0027506D /* MyMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7781710419911F6B0027506D /* MyMailViewController.m */; };
 		77817108199128340027506D /* UserUpcomingLunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77817107199128340027506D /* UserUpcomingLunch.m */; };
@@ -77,6 +78,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7712090F19954B47000BDE52 /* Ryan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ryan-Prefix.pch"; sourceTree = "<group>"; };
+		7712091019954BA2000BDE52 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		7712091219954C94000BDE52 /* SitWithSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SitWithSmall.png; sourceTree = "<group>"; };
 		77170CE4197591FD00C288EE /* Ryan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ryan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77170CE7197591FD00C288EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		77170CE9197591FD00C288EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,11 +88,10 @@
 		77170CEF197591FD00C288EE /* Ryan-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ryan-Info.plist"; sourceTree = "<group>"; };
 		77170CF1197591FD00C288EE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		77170CF3197591FD00C288EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		77170CF5197591FD00C288EE /* Ryan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ryan-Prefix.pch"; sourceTree = "<group>"; };
 		77170CF6197591FD00C288EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		77170CF7197591FD00C288EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		77170CFA197591FD00C288EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		77170CFD197591FE00C288EE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		77170CFD197591FE00C288EE /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		77170CFF197591FE00C288EE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		77170D05197591FE00C288EE /* RyanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RyanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77170D06197591FE00C288EE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -102,8 +105,6 @@
 		77170D261975A96E00C288EE /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		77170D281975A9CA00C288EE /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
 		77170D291975A9CA00C288EE /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
-		77170D2B1975BF9B00C288EE /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
-		77170D2D1975C66400C288EE /* SitWithSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SitWithSmall.png; sourceTree = "<group>"; };
 		77170D2F197FF7B400C288EE /* MyLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLunchViewController.h; sourceTree = "<group>"; };
 		77170D30197FF7B400C288EE /* MyLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLunchViewController.m; sourceTree = "<group>"; };
 		77170D3219800B6E00C288EE /* UnionGrill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UnionGrill.png; sourceTree = "<group>"; };
@@ -126,6 +127,8 @@
 		77170D541988118100C288EE /* one_restaurant.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = one_restaurant.xml; path = ../../Downloads/one_restaurant.xml; sourceTree = "<group>"; };
 		77170D551988118100C288EE /* one_lunchtable.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = one_lunchtable.xml; path = ../../Downloads/one_lunchtable.xml; sourceTree = "<group>"; };
 		77170D561988118100C288EE /* lunchtable_list.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = lunchtable_list.xml; path = ../../Downloads/lunchtable_list.xml; sourceTree = "<group>"; };
+		771892A519992E3D0011EEA1 /* GoogleAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAccess.h; sourceTree = "<group>"; };
+		771892A619992E3D0011EEA1 /* GoogleAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAccess.m; sourceTree = "<group>"; };
 		778171001990127C0027506D /* PastLunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastLunch.h; sourceTree = "<group>"; };
 		778171011990127C0027506D /* PastLunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastLunch.m; sourceTree = "<group>"; };
 		7781710319911F6B0027506D /* MyMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMailViewController.h; sourceTree = "<group>"; };
@@ -154,7 +157,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77170CEA197591FD00C288EE /* CoreGraphics.framework in Frameworks */,
-				77170D2C1975BF9B00C288EE /* FacebookSDK.framework in Frameworks */,
+				7712091119954BA2000BDE52 /* FacebookSDK.framework in Frameworks */,
 				77170CEC197591FD00C288EE /* UIKit.framework in Frameworks */,
 				77170CE8197591FD00C288EE /* Foundation.framework in Frameworks */,
 			);
@@ -197,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				77170D461986B3B100C288EE /* MessageUI.framework */,
-				77170D2B1975BF9B00C288EE /* FacebookSDK.framework */,
+				7712091019954BA2000BDE52 /* FacebookSDK.framework */,
 				77170CE7197591FD00C288EE /* Foundation.framework */,
 				77170CE9197591FD00C288EE /* CoreGraphics.framework */,
 				77170CEB197591FD00C288EE /* UIKit.framework */,
@@ -219,7 +222,7 @@
 				77170D1E1975A76500C288EE /* rsz_sitwith.png */,
 				77170D3219800B6E00C288EE /* UnionGrill.png */,
 				77170D3419800ED800C288EE /* HarrisGrill.png */,
-				77170D2D1975C66400C288EE /* SitWithSmall.png */,
+				7712091219954C94000BDE52 /* SitWithSmall.png */,
 				77170D361980171A00C288EE /* sharpedgebistro.png */,
 				77170D41198192C300C288EE /* tablepic.png */,
 				77170CF6197591FD00C288EE /* AppDelegate.h */,
@@ -236,6 +239,8 @@
 				77170D291975A9CA00C288EE /* ThirdViewController.m */,
 				77170D3819801F3C00C288EE /* RegisterViewController.h */,
 				77170D3919801F3C00C288EE /* RegisterViewController.m */,
+				771892A519992E3D0011EEA1 /* GoogleAccess.h */,
+				771892A619992E3D0011EEA1 /* GoogleAccess.m */,
 				77170D251975A96E00C288EE /* SecondViewController.h */,
 				77170D261975A96E00C288EE /* SecondViewController.m */,
 				77879A6C198FE83C002AA39A /* UpcomingLunch.h */,
@@ -268,7 +273,7 @@
 				77170CEF197591FD00C288EE /* Ryan-Info.plist */,
 				77170CF0197591FD00C288EE /* InfoPlist.strings */,
 				77170CF3197591FD00C288EE /* main.m */,
-				77170CF5197591FD00C288EE /* Ryan-Prefix.pch */,
+				7712090F19954B47000BDE52 /* Ryan-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				77170D5D1988118100C288EE /* lunchtable_list.xml in Resources */,
 				77170D4F1987F2B800C288EE /* 4Table.png in Resources */,
 				77170D00197591FE00C288EE /* Images.xcassets in Resources */,
+				7712091319954C94000BDE52 /* SitWithSmall.png in Resources */,
 				77170CF2197591FD00C288EE /* InfoPlist.strings in Resources */,
 				77170D4E1987F2B800C288EE /* 3Table.png in Resources */,
 				77170CFB197591FD00C288EE /* Main.storyboard in Resources */,
@@ -402,7 +408,6 @@
 				778799F219894A6A002AA39A /* emptyTable.png in Resources */,
 				77170D1F1975A76500C288EE /* rsz_sitwith.png in Resources */,
 				77170D5B1988118100C288EE /* one_restaurant.xml in Resources */,
-				77170D2E1975C66400C288EE /* SitWithSmall.png in Resources */,
 				77170D5A1988118100C288EE /* request_list.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,6 +448,7 @@
 				77817108199128340027506D /* UserUpcomingLunch.m in Sources */,
 				778799F5198972B4002AA39A /* SettingsViewController.m in Sources */,
 				77170D241975A8C400C288EE /* FirstViewController.m in Sources */,
+				771892A719992E3D0011EEA1 /* GoogleAccess.m in Sources */,
 				77879A6B198BDF7D002AA39A /* Restaurant.m in Sources */,
 				77879A6E198FE83D002AA39A /* UpcomingLunch.m in Sources */,
 				778171021990127C0027506D /* PastLunch.m in Sources */,
@@ -569,7 +575,7 @@
 		77170D17197591FE00C288EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -587,7 +593,7 @@
 		77170D18197591FE00C288EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

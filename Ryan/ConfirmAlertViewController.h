@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GoogleAccess.h"
 
-@interface ConfirmAlertViewController : UIViewController <UIAlertViewDelegate>
+@interface ConfirmAlertViewController : UIViewController <UIAlertViewDelegate, GoogleOAuthDelegate>
 
 @property UIAlertView *confirm;
+
+@property GoogleAccess *googleAccess;
 
 @end

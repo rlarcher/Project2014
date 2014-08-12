@@ -48,7 +48,6 @@
 // Parsing Methods
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    //NSLog(@"%@",elementName);
     // create new upcoming lunch object
     if([elementName isEqualToString:@"RequestTobeProcessed"])
     {
@@ -63,7 +62,7 @@
     {
         self.parsingEmail = YES;
     }
-    if([elementName isEqualToString:@"user name"])
+    if([elementName isEqualToString:@"user_name"])
     {
         self.parsingUserName = YES;
     }
@@ -71,7 +70,7 @@
     {
         self.parsingRestaurant = YES;
     }
-    if([elementName isEqualToString:@"lunchtable_id"])
+    if([elementName isEqualToString:@"id"])
     {
         self.parsingLunchtable_id = YES;
     }
@@ -79,7 +78,10 @@
     {
         self.parsingRestaurant_id = YES;
     }
-    
+    if([elementName isEqualToString:@"id"])
+    {
+        self.parsingRequest_id = YES;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName
@@ -99,7 +101,7 @@
     {
         self.parsingEmail = NO;
     }
-    if([elementName isEqualToString:@"user name"])
+    if([elementName isEqualToString:@"user_name"])
     {
         self.parsingUserName = NO;
     }
@@ -109,11 +111,15 @@
     }
     if([elementName isEqualToString:@"lunchtable_id"])
     {
-        self.parsingLunchtable_id = YES;
+        self.parsingLunchtable_id = NO;
     }
     if([elementName isEqualToString:@"restaurant_id"])
     {
-        self.parsingRestaurant_id = YES;
+        self.parsingRestaurant_id = NO;
+    }
+    if([elementName isEqualToString:@"id"])
+    {
+        self.parsingRequest_id = NO;
     }
 }
 
@@ -144,6 +150,10 @@
     {
         [self.currentUpcomingLunch setLunctable_id:(NSString *)string];
     }
+    if(self.parsingRequest_id)
+    {
+        [self.currentUpcomingLunch setRequesttobeprocessed_id:(NSString *)string];
+    }
 }
 
 - (void)viewDidLoad
@@ -158,7 +168,7 @@
     if([userUpcomingLunchObjects count] > 0)
     {
         UserUpcomingLunch *firstUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
-        self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 30, 100, 100)];
+        self.lunch = [[UITextView alloc] initWithFrame:CGRectMake(20, 80, 140, 60)];
         // just leave with no lunches for now
         self.lunch.text = [NSString stringWithFormat:@"%@ %@",[firstUpcomingLunch restaurant],[firstUpcomingLunch date]];
         
@@ -209,17 +219,16 @@
 }
 
 - (void)confirmRemoveLunch:(UIButton *)sender {
-    [self.confirm show];
     //SitWithWebServer/deleteRequesttobeprocessed?requesttobeprocessed_id= &lunchtable_id= &email=
     UserUpcomingLunch *currentUpcomingLunch = userUpcomingLunchObjects[self.upcomingLunchIndex];
     NSString *requesttobeprocessed_id = [currentUpcomingLunch requesttobeprocessed_id];
     NSString *lunchtable_id = [currentUpcomingLunch lunchtable_id];
     NSString *email = [currentUpcomingLunch email];
-
     NSString *fullUrl = [NSString stringWithFormat:@"%@/deleteRequesttobeprocessed?requesttobeprocessed_id=%@&lunchtable_id=%@&email=%@",serverAddress,requesttobeprocessed_id,lunchtable_id,email];
     NSURL *url = [NSURL URLWithString:fullUrl];
-    //NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
-    //[parser parse];
+    NSXMLParser *parser = [[NSXMLParser alloc]initWithContentsOfURL:url];
+    [parser parse];
+    [self.confirm show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
